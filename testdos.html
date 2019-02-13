@@ -1,0 +1,65 @@
+<html>
+<style>
+.wrapper {
+     overflow-x:hidden;
+}
+.right:before {
+    right: -999em;
+    background: rebeccapurple;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 999em;
+    top: 0;
+    bottom: 0;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width:1100px;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.col-sm-6 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float:left;
+    width:50%;
+}
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
+</style>
+<body>
+
+<div style="background-color: aquamarine; padding: 0" class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="col-sm-6">
+                    <h1>Left Panel</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae doloribus unde, distinctio a autem, soluta nulla similique. Vero natus deleniti, culpa consequuntur eveniet beatae laudantium in fuga mollitia sapiente! Assumenda!</p>
+                </div>
+                <div class="col-sm-6 gray-background right" style="background-color: rebeccapurple;padding: 10px;color:#fff">
+                    <h1>Right Panel</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, beatae amet est repellendus optio, exercitationem distinctio quasi ut, sapiente, nihil sed libero facere fugiat eaque numquam nulla mollitia suscipit nobis.</p>
+                </div>
+            </div>
+        </div>
+        <!--  .row -->
+    </div>
+    <!--  .container-fluid -->
+</div>
+</body>
+</html>

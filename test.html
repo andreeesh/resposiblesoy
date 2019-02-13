@@ -1,0 +1,40 @@
+<html>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+.wrapper {
+     overflow-x:hidden;
+}
+
+.right:before {
+    right: -999em;
+    background: rebeccapurple;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 999em;
+    top: 0;
+    bottom: 0;
+}
+</style>
+<body>
+
+<div style="background-color: aquamarine; padding: 0" class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="col-sm-6">
+                    <h1>Left Panel</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae doloribus unde, distinctio a autem, soluta nulla similique. Vero natus deleniti, culpa consequuntur eveniet beatae laudantium in fuga mollitia sapiente! Assumenda!</p>
+                </div>
+                <div class="col-sm-6 gray-background right" style="background-color: rebeccapurple;padding: 10px;color:#fff">
+                    <h1>Right Panel</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, beatae amet est repellendus optio, exercitationem distinctio quasi ut, sapiente, nihil sed libero facere fugiat eaque numquam nulla mollitia suscipit nobis.</p>
+                </div>
+            </div>
+        </div>
+        <!--  .row -->
+    </div>
+    <!--  .container-fluid -->
+</div>
+</body>
+</html>
