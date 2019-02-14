@@ -67,16 +67,16 @@ echo '
 					<a href="#" class="mm-link">Misión y objetivos</a>
 					<a href="#" class="mm-link">Nuestra historia</a>
 					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Quiénes somos</h2></a>
-					<a class="mm-link" href="#">Estructura de gobierno</a>
-					<a class="mm-link" href="#">Comité ejecutivo</a>
+					<a href="#"><h2 class="h-mm">Nuestra gestión</h2></a>
+					<a href="#" class="mm-link">Informes de gestión</a>
+					<a href="#" class="mm-link">Reportes financieros</a>
 				</div>
 				<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Nuestra gestión</h2></a>
-					<a href="#" class="mm-link">Informe de gestión</a>
-					<a href="#" class="mm-link">Reporte financiero anual</a>
-					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Preguntas frecuentes</h2></a>
+					<a href="#"><h2 class="h-mm">Quiénes somos</h2></a>
+					<a class="mm-link" href="#">Estructura de Gobierno</a>
+					<a class="mm-link" href="#">Comité Ejecutivo</a>
+					<a class="mm-link" href="#">Secretariado Ejecutivo</a>
+					<a class="mm-link" href="#">Task Forces</a>
 				</div>
 				<div class="col-md-4">
 					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
@@ -86,29 +86,6 @@ echo '
       </li>
       <li>
       	<a href="#">Miembros</a>
-      	<ul>
-        	<li>
-	        	<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Qué es la RTRS</h2></a>
-					<a href="#" class="mm-link">Quiero ser miembro</a>
-					<a href="#" class="mm-link">Guía de productores RTRS</a>
-					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Quiénes somos</h2></a>
-					<a class="mm-link" href="#">Estructura de gobierno</a>
-					<a class="mm-link" href="#">Comité ejecutivo</a>
-				</div>
-				<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Nuestra gestión</h2></a>
-					<a href="#" class="mm-link">Informe de gestión</a>
-					<a href="#" class="mm-link">Reporte financiero anual</a>
-					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Preguntas frecuentes</h2></a>
-				</div>
-				<div class="col-md-4">
-					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
-				</div>
-			</li>
-		</ul>
       </li>
       <li>
       	<a href="#">Productores</a>

@@ -57,10 +57,10 @@ font-size: 34px; color:#fff;}
 .header-transparent.ab-hide #Top_bar { z-index: 300 }
 #rs-top-menu-right { float: right } 
 #rs-top-menu-left { float: left } 
-#rs-btn-encuentre, .btn-general-amarillo { font-weight:600; background-color:#bebe07; 
+#rs-btn-encuentre { font-weight:600; background-color:#bebe07; 
 	padding: 7px 30px; border-radius: 16px; color:#fff; font-size:14px; }
-.btn-general-amarillo:hover { color:#fff; text-decoration: none }
-.btn-general-amarillo { position: absolute; border-radius: 19px;}
+.amarillo:hover { color:#bebe07; text-decoration: none }
+.amarillo { border:1px solid #bebe07; color:#bebe07; float: right; }
 #rs-lang-menu { font-weight: 500; margin: 0 25px 0 25px; font-size: 17px }
 #rs-search { margin-top:5px }
 .sep { margin:0 10px 0 10px } /*SEPARADOR | TOP MENU*/
@@ -150,7 +150,7 @@ font-size: 34px; color:#fff;}
 	#title-numbers{ margin-bottom: 60px }
 	/*AGENDA Y NOVEDADES*/
 	.right { padding:60px 0 60px 60px; }
-	.left { padding:60px 30px 60px 0; }
+	.left { padding:60px 30px 30px 0; }
 	.header-na {margin-bottom:60px;}
 	.news-date { font-size: 14px !important; margin-bottom: 10px; }
 	.agenda-date { font-size: 14px !important; margin-bottom: 5px; }
