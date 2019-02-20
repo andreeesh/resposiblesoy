@@ -55,7 +55,7 @@
 <?php
 function printMegaMenu(){
 echo '
-<div class="menu-container">
+<div class="menu-container vc_hidden-sm vc_hidden-xs">
   <div class="menu">
     <ul>
       <li>
@@ -76,7 +76,8 @@ echo '
 					<a class="mm-link" href="#">Estructura de Gobierno</a>
 					<a class="mm-link" href="#">Comité Ejecutivo</a>
 					<a class="mm-link" href="#">Secretariado Ejecutivo</a>
-					<a class="mm-link" href="#">Task Forces</a>
+					<div class="mm-sep"></div>
+					<a href="#"><h2 class="h-mm">Task Forces</h2></a>
 				</div>
 				<div class="col-md-4">
 					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
@@ -117,7 +118,7 @@ echo '
 		<h1 class="blanco">Encuentre</h1>
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    <div class= navbar" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cómo certificarse <span class="caret"></span></a>
@@ -181,20 +182,20 @@ $tags=get_tags(array('hide_empty'=>false));
 								mfn_wp_split_menu();
 							} else {
 								echo '
-								<div id="rs-top-menu">
+								<div id="rs-top-menu" class="vc_hidden-sm vc_hidden-xs">
 									<div id="rs-top-menu-left">
-										<a>Biblioteca</a> <span class="sep">|</span>
-										<a>Acceda a la plataforma</a> <span class="sep">|</span>
-										<a>Información del mercado</a>
+										<a href="#">Biblioteca</a> <span class="sep">|</span>
+										<a href="#">Acceda a la plataforma</a> <span class="sep">|</span>
+										<a href="#">Información del mercado</a>
 									</div>
 									<div id="rs-top-menu-right">
-										<a id="rs-btn-encuentre">ENCUENTRE</a>
-										<a id="rs-lang-menu">ES</a>
+										<a href="#" id="rs-btn-encuentre">ENCUENTRE</a>
+										<a href="#" id="rs-lang-menu">ES</a>
 										<div id="rs-search"></div>
 									</div>
 								</div>';
 								printMegaMenu();
-								#mfn_wp_nav_menu();
+								mfn_wp_nav_menu();
 							}
 
 							// responsive menu button ---------

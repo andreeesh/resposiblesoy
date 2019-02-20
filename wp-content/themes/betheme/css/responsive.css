@@ -477,7 +477,7 @@ html,body{overflow-x:hidden}
 
 	/* Header --------------- */
 
-	#Top_bar,#Action_bar{background-color:#fff!important;position:static}
+	#Top_bar,#Action_bar{background-color:#fff;position:static}
 	#Top_bar .container{max-width:100%!important;padding:0!important}
 	#Top_bar .top_bar_left{float:none;width:100%!important;background:none!important}
 

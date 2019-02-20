@@ -4010,7 +4010,7 @@ if (! function_exists('sc_blockquote')) {
 }
 
 /**
- * News [news]
+ * News [news-agenda]
  */
 
 if (! function_exists('sc_news')) {
@@ -4040,7 +4040,7 @@ if (! function_exists('sc_news')) {
 
 		$output.='
 		<div class="wrapper">
-		    <div class="container">
+		    <div class="container hidden-xs hidden-sm">
 		        <div class="row">
 		            <div>
 		                <div class="col-sm-7 left">
@@ -4067,6 +4067,62 @@ if (! function_exists('sc_news')) {
 		                    }
 		      $output.='</div> <!-- end col-sm-7 -->
 		                <div class="col-sm-5 right">
+		                    <h1 class="blanco header-na">Agenda</h1>
+		                    <div id="agenda-container">';
+			                    if ($agenda_query->have_posts()) {
+			                    	while ($agenda_query->have_posts()) {
+			                    		$agenda_query->the_post();
+			                    		$agenda=get_post();
+			                    		$output.='<div class="row-agenda">';		                    		
+		  									if(has_post_thumbnail($agenda->ID)){
+		  										$image=wp_get_attachment_image_src(get_post_thumbnail_id($agenda->ID), 'single-post-thumbnail');
+		  										$output.='<div class="agenda-img"><img src="'.$image[0].'"></div>';
+											}
+											$output.='<div class="agenda-date">'.get_the_date('', $agenda->ID).'</div>';	
+											$output.='<p class="agenda-excerpt">'.get_the_excerpt($agenda->ID).'</p>';		
+											$output.='<div class="agenda-sep"></div>';
+										$output.='</div>';	                    	}
+			                    }
+		      	  $output.='</div> 
+		      	  			<div id="scrolles-agenda">
+			      	  			<div id="scroll-up-agenda">
+			      	  				<img src="/wp-content/uploads/2019/01/arrow-up-agenda.png" width="28">
+			      	  			</div>
+			      	  			<div id="scroll-down-agenda">
+			      	  				<img src="/wp-content/uploads/2019/01/arrow-down-agenda.png" width="28">
+			      	  			</div>
+		      	  			</div>
+		      			</div> 
+		            </div> 
+		        </div> 
+		    </div> 
+		    <div class="container-fluid hidden-lg hidden-md">
+		        <div class="row">
+		            <div>
+		                <div class="col-sm-7 left">
+		                    <a href="#" class="link-head-news"><h1 class="celeste header-na">Novedades</h1></a>';
+		                    if ($news_query->have_posts()) {
+		                    	while ($news_query->have_posts()){
+		                    		$news_query->the_post();
+		                    		$news=get_post();
+		                    		$output.='<div class="row row-novedades">';
+		                    		
+		                    		if(has_post_thumbnail($news->ID)){
+  										$image=wp_get_attachment_image_src(get_post_thumbnail_id($news->ID), 'single-post-thumbnail');
+  										$output.='<div class="col-sm-6 news-img"><img src="'.$image[0].'"></div>';
+									}
+
+									$output.='<div class="col-sm-6">';
+									$output.='<div class="news-date">'.get_the_date('', $news->ID).'</div>';	
+									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h2 class="news-title">'.get_the_title($news->ID).'</h2></a>';
+									$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
+									$output.='</div>';
+									$output.='</div>';
+								}
+								$output.='<a href="#" class="button-info-home amarillo">Ver más</a>';
+		                    }
+		      $output.='</div> <!-- end col-sm-7 -->
+		                <div class="col-sm-5 right right-col-agenda">
 		                    <h1 class="blanco header-na">Agenda</h1>
 		                    <div id="agenda-container">';
 			                    if ($agenda_query->have_posts()) {

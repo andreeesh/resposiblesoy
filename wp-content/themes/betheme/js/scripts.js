@@ -528,31 +528,114 @@
   $(document).ready(function() {
    
     /**
-    * Hover bloques home
+    * Hover bloques home uno
     */
-    $("#bloque-home-uno").on("mouseenter", function(){
-      $("#hover-bloque-uno").removeClass("hidden");
-    });
+    if($(window).width()>=1240){
+      $("#bloque-home-uno").on("mouseenter", function(){
+        'use strict';
+        $("#bloque-home-uno").removeClass("fondo-bloque-home-uno");
+        $("#bloque-home-uno").addClass("fondo-verde-bloque-home");
+        $("#caption-uno").html('<div class="texto-bloques-home">Forme parte del diálogo multisectorial y global</div>');
+      });
 
-    $("#hover-bloque-uno").on("mouseleave", function(){
-      $("#hover-bloque-uno").addClass("hidden");
-    });
+      $("#bloque-home-uno").on("mouseleave", function(){
+        'use strict';
+        $("#bloque-home-uno").addClass("fondo-bloque-home-uno");
+        $("#bloque-home-uno").removeClass("fondo-verde-bloque-home");
+        $("#caption-uno").html('Miembros');
+      });
+    }
 
-    $("#bloque-home-dos").on("mouseenter", function(){
-      $("#hover-bloque-dos").removeClass("hidden");
-    });
+    if($(window).width()<1240){
+      $("#bloque-home-uno").on("touchstart", function(){
+        'use strict';
+        if($("#bloque-home-uno").hasClass('fondo-bloque-home-uno')) {
+          $("#bloque-home-uno").removeClass("fondo-bloque-home-uno");
+          $("#bloque-home-uno").addClass("fondo-verde-bloque-home");
+          $("#caption-uno").html('<div class="texto-bloques-home">Forme parte del diálogo multisectorial y global</div>');
+          return true;
+        }else{
+          $("#bloque-home-uno").addClass('fondo-bloque-home-uno');
+          $("#bloque-home-uno").removeClass("fondo-verde-bloque-home");
+          $("#caption-uno").html('Miembros');
+          return false;
+        }
+      });
+    }
 
-    $("#hover-bloque-dos").on("mouseleave", function(){
-      $("#hover-bloque-dos").addClass("hidden");
-    });
+    /**
+    * Hover bloques home dos
+    */
+    if($(window).width()>=1240){
+      $("#bloque-home-dos").on("mouseenter", function(){
+        'use strict';
+        $("#bloque-home-dos").removeClass("fondo-bloque-home-dos");
+        $("#bloque-home-dos").addClass("fondo-verde-bloque-home");
+        $("#caption-dos").html('<div class="texto-bloques-home">Ser productor RTRS es un sello de competitividad, reputación y sostenibilidad</div>');
+      });
 
-    $("#bloque-home-tres").on("mouseenter", function(){
-      $("#hover-bloque-tres").removeClass("hidden");
-    });
+      $("#bloque-home-dos").on("mouseleave", function(){
+        'use strict';
+        $("#bloque-home-dos").addClass("fondo-bloque-home-dos");
+        $("#bloque-home-dos").removeClass("fondo-verde-bloque-home");
+        $("#caption-dos").html('Productores');
+      });
+    }
 
-    $("#hover-bloque-tres").on("mouseleave", function(){
-      $("#hover-bloque-tres").addClass("hidden");
-    });
+    if($(window).width()<1240){
+      $("#bloque-home-dos").on("touchstart", function(){
+        'use strict';
+        if($("#bloque-home-dos").hasClass('fondo-bloque-home-dos')) {
+          $("#bloque-home-dos").removeClass("fondo-bloque-home-dos");
+          $("#bloque-home-dos").addClass("fondo-verde-bloque-home");
+          $("#caption-dos").html('<div class="texto-bloques-home">Ser productor RTRS es un sello de competitividad, reputación y sostenibilidad</div>');
+          return true;
+        }else{
+          $("#bloque-home-dos").addClass('fondo-bloque-home-dos');
+          $("#bloque-home-dos").removeClass("fondo-verde-bloque-home");
+          $("#caption-dos").html('Productores');
+          return false;
+        }
+      });
+    }
+
+    /**
+    * Hover bloques home tres
+    */
+    if($(window).width()>=1240){
+      $("#bloque-home-tres").on("mouseenter", function(){
+        'use strict';
+        $("#bloque-home-tres").removeClass("fondo-bloque-home-tres");
+        $("#bloque-home-tres").addClass("fondo-verde-bloque-home");
+        $("#caption-tres").html('<div class="texto-bloques-home">Comprometidos con el desarrollo de cadenas de valor sustentables</div>');
+      });
+
+      $("#bloque-home-tres").on("mouseleave", function(){
+        'use strict';
+        $("#bloque-home-tres").addClass("fondo-bloque-home-tres");
+        $("#bloque-home-tres").removeClass("fondo-verde-bloque-home");
+        $("#caption-tres").html('Compradores');
+      });
+    }
+
+    if($(window).width()<1240){
+      $("#bloque-home-tres").on("touchstart", function(){
+        'use strict';
+        if($("#bloque-home-tres").hasClass('fondo-bloque-home-tres')) {
+          $("#bloque-home-tres").removeClass("fondo-bloque-home-tres");
+          $("#bloque-home-tres").addClass("fondo-verde-bloque-home");
+          $("#caption-tres").html('<div class="texto-bloques-home">Comprometidos con el desarrollo de cadenas de valor sustentables</div>');
+          return true;
+        }else{
+          $("#bloque-home-tres").addClass('fondo-bloque-home-tres');
+          $("#bloque-home-tres").removeClass("fondo-verde-bloque-home");
+          $("#caption-tres").html('Compradores');
+          return false;
+        }
+      });
+    }
+
+   
 
     /**
     * Mega Menu (Sobre RTRS)
@@ -589,7 +672,7 @@
      * Encuentre
      */
 
-     $('#rs-btn-encuentre').on('click',function(e) { 
+     $('#rs-btn-encuentre, #mobile-btn-encuentre').on('click',function(e) { 
       $('#rs-encuentra').removeClass('hidden');
      });
 
@@ -602,7 +685,7 @@
      * Buscador
      */
 
-     $('#rs-search').on('click',function(e) { 
+     $('#rs-search, #mobile-search').on('click',function(e) { 
       $('#rs-buscador').removeClass('hidden');
      });
 
@@ -891,7 +974,7 @@
         close();
       });
 
-      $('.close', slide).on('click', function(e) {
+      $('.close, #mobile-search, #mobile-btn-encuentre', slide).on('click', function(e) {
         e.preventDefault();
         close();
       });
