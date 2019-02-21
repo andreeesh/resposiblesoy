@@ -17,16 +17,14 @@ li { vertical-align: middle !important; }
 
 /*BLOQUES HOME*/
 .fondo-verde-bloque-home { background: #578721; }
-.fondo-bloque-home-uno { background: url(/wp-content/uploads/2019/01/foto-bloque-miembros.jpg) no-repeat center; }
-.fondo-bloque-home-dos { background: url(/wp-content/uploads/2019/01/foto-bloque-productores.jpg) no-repeat center; }
-.fondo-bloque-home-tres { background: url(/wp-content/uploads/2019/01/RTRS_productores.jpg) no-repeat center; }
+.fondo-bloque-home-uno { background: url(/wp-content/uploads/2019/02/tractor-miembros.jpg) no-repeat center; background-size: cover }
+.fondo-bloque-home-dos { background: url(/wp-content/uploads/2019/02/foto-bloque-productores.jpg) no-repeat center; background-size: cover }
+.fondo-bloque-home-tres { background: url(/wp-content/uploads/2019/02/RTRS_productores.jpg) no-repeat center; background-size: cover }
 .bloques-home { cursor: pointer; display: table; width:100%; height: 326px; text-align: center }
 .caption-bloques-home { display: table-cell; vertical-align: middle; text-align: center; font-weight: 700; 
 font-size: 34px; color:#fff;}
 .hover-bloques-home { display: table-cell; vertical-align: middle; background: #578721; position: absolute; cursor: pointer; height: 100%; width: 100%; top: 0; left: 0;}
-.texto-bloques-home { display: table-cell; text-align: center; vertical-align: middle; color:#fff; font-size: 20px;
-    font-weight: 500;
-    line-height: 25px;}
+.texto-bloques-home { padding:20px; display: table-cell; text-align: center; vertical-align: middle; color:#fff; font-size: 20px; font-weight: 500; line-height: 25px;}
 
 /*STICKY MENU*/
 #Top_bar.is-sticky .menu > ul > li a, #Top_bar.is-sticky #rs-top-menu-left a, #Top_bar.is-sticky .sep, 
@@ -96,17 +94,24 @@ font-size: 34px; color:#fff;}
 /*Novedades y agenda*/
 .wrapper { overflow-x:hidden; background-color: #f7f7f0; padding:0; }
 .right { background-color: #35a7be; }
-.right:before { right: -999em; background: #35a7be; content: ''; display: block; position: absolute; width: 999em; top: 0; bottom: 0; }
 .block-news { background-color:#f7f7f0; }
 .block-agenda { background-color:#37adc4; }
 .celeste { color:#36afc8; }
 .blanco { color:#ffffff !important; }
-.news-date { color:#36afc8 !important; }
+.news-date { color:#36afc8 !important; margin-top:10px; }
+.news-img { background-size: cover; height:200px; }
 .news-title { color:#36afc8; font-weight: 700}
 .agenda-date { color:#0e4548; }
 .agenda-excerpt { color:#fff; }
 .agenda-sep { border-bottom:1px solid #155d60; }
 .link-head-news:hover, .link-title-news:hover { text-decoration: none; }
+#agenda-container { height: 568px; overflow: auto; width:90%;}
+#agenda-container::-webkit-scrollbar { width: 0 !important }
+#agenda-container { overflow: -moz-scrollbars-none; }
+#agenda-container { -ms-overflow-style: none; }
+#scroll-up-agenda { cursor: pointer; } 
+#scroll-down-agenda { cursor: pointer; margin-top:-8px;} 
+#scrolles-agenda { bottom:69px; position: absolute; right: 0}
 
 /*Encuentra desplegado*/
 #rs-encuentra { display:table; background:#bebe07; position:fixed; height:100vh; width: 100%; top:0; left:0; 
@@ -160,6 +165,7 @@ font-size: 34px; color:#fff;}
 	/*NUMBERS*/
 	#title-numbers{ margin-bottom: 60px }
 	/*AGENDA Y NOVEDADES*/
+	.right:before { right: -999em; background: #35a7be; content: ''; display: block; position: absolute; width: 999em; top: 0; bottom: 0; }
 	.right { padding:60px 0 60px 60px; }
 	.left { padding:60px 30px 30px 0; }
 	.header-na {margin-bottom:60px;}
@@ -168,15 +174,8 @@ font-size: 34px; color:#fff;}
 	.row-novedades {margin-bottom:30px;}
 	.news-excerpt { font-size:14px; margin-top:20px;}
 	.agenda-excerpt { font-size:14px; margin-top:0px;}
-	.agenda-img { margin-bottom:10px; } 
+	.agenda-img { margin-bottom:10px; width:100%; height:200px; background-size: cover } 
 	.agenda-sep { margin:5px 0 20px 0; }
-	#agenda-container { height: 568px; overflow: auto; width:90%;}
-	#agenda-container::-webkit-scrollbar { width: 0 !important }
-	#agenda-container { overflow: -moz-scrollbars-none; }
-	#agenda-container { -ms-overflow-style: none; }
-	#scroll-up-agenda { cursor: pointer; } 
-	#scroll-down-agenda { cursor: pointer; margin-top:-8px;} 
-	#scrolles-agenda { bottom:69px; position: absolute; right: 0}
 	/*ENCUENTRA*/ 
 	#cross-encuentra, #cross-buscador { right: 40px; top: 40px; }
 	.navbar-default .navbar-nav>li>a { font-size: 20px; margin:0 5px;}
@@ -253,7 +252,7 @@ font-size: 34px; color:#fff;}
 	/*ENCUENTRA*/ 
 	#cross-encuentra, #cross-buscador { right: 20px; top: 20px; }
 	.navbar-default .navbar-nav>li>a { font-size: 20px; margin:0 5px;}
-	.navbar-default { display: flex;   justify-content: center; flex-wrap: wrap; margin-top:110px;}
+	.navbar-default { display: flex;   justify-content: center; flex-wrap: wrap; margin-top:30px;}
 	.dropdown-menu>li>a {font-size: 18px; padding: 6px 15px;}
 	.navbar-default .navbar-nav .open .dropdown-menu>li>a { color: #fff; }
 	.dropdown-menu li { text-align: center !important }
@@ -262,18 +261,15 @@ font-size: 34px; color:#fff;}
 	#rs-input-search { width:100%; font-size:22px;}
 	#rs-input-search::placeholder { font-size:22px;}
 	#rs-explore-tags { font-size:14px; margin-top:10px; line-height: 25px}
-	.right-col-agenda { padding:30px; margin-top: 25px;}
-	.left { padding:30px; }
 	.amarillo { float:right; width:100% ; text-align:center;}
 	.mobile-sticky #Top_bar.is-sticky #logo { margin: 0px 50px !important; }
-	/*AGENDA*/
-	#agenda-container { height: 347px; overflow: auto; }
-	#agenda-container::-webkit-scrollbar { width: 0 !important }
-	#agenda-container { overflow: -moz-scrollbars-none; }
-	#agenda-container { -ms-overflow-style: none; }
-	#scroll-up-agenda { cursor: pointer; } 
-	#scroll-down-agenda { cursor: pointer; margin-top:-8px;} 
-	#scrolles-agenda { bottom:69px; position: absolute; right: 0}
+	/*NOVEDADES Y AGENDA*/
+	.right-col-agenda { padding:20px 0; margin-top: 25px;}
+	.left { padding:20px 0; }
+	#agenda-container { height: 480px; overflow: auto; width:100% !important;}
+	#scrolles-agenda { bottom:69px; position: absolute; right: 0 }
+	.agenda-sep { margin-bottom: 15px; }
+	.agenda-img { margin-bottom:10px; width:100%; height:150px; background-size: cover } 
 	/*CERTIFICACIONES*/
 	.icon-cert { margin-bottom: 0 !important; }
 	#row-iconos-certificaciones .wpb_wrapper > div { margin-bottom: 15px !important; margin-top: 15px; }	
@@ -282,18 +278,20 @@ font-size: 34px; color:#fff;}
 	.heading-info-home { margin-bottom:0 !important; margin-top: 30px !important; line-height: 30px; font-size: 18px !important;}
 	.col-info-home .vc_custom_1548095872096 { margin-bottom: 0 !important }
 	.empty-30 { margin-bottom: 0!important } 
-	h1 { font-size:23px !important; }
+	.button-info-home { font-size:13px; }
+	h1 { font-size:22px !important; }
 	/*SAVE THE DATE*/
 	#row-save-the-date .wpb_wrapper > div { margin-bottom: 15px !important; }
 	/*RTRS EN NUMEROS*/
 	.valor-numbers { margin-bottom: 1px !important; }
 	#rts-in-numbers .wpb_wrapper > div { margin-bottom: 10px !important }
 	/*FOOTER*/
+	.row-menu-footer { margin-top:20px; }
 	#Footer { padding-top: 15px !important; }
 	.footer-field { margin-top: 0 !important; }
 	.cont-search-footer .wpb_wrapper > div { margin-bottom: 0 !important; }
 	.row-menu-footer .wpb_wrapper > div { margin-bottom: 10px !important; }
-	.row-menu-footer h1 { margin-bottom: 10px !important; font-size:18px !important;}
+	.row-menu-footer h1 { margin-bottom: 10px !important; margin-top: 15px; font-size:18px !important;}
 	.menu-footer { margin-top: 20px !important; }
 	#social-footer { margin-top: 0 !important; }
 	.menu-footer a { display: block !important; margin-bottom: 5px;} 
