@@ -685,7 +685,7 @@
      * Buscador
      */
 
-     $('#rs-search, #mobile-search').on('click',function(e) { 
+     $('#rs-search, #mobile-search, #rs-search-alt').on('click',function(e) { 
       $('#rs-buscador').removeClass('hidden');
      });
 

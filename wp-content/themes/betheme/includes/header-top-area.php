@@ -54,9 +54,14 @@
 
 <?php
 function printMegaMenu(){
-echo '
+global $wp;
+$menu_id="menu_home";
+if(strpos(home_url($wp->request), "miembros")){
+	$menu_id="menu_not_home";
+}
+return '
 <div class="menu-container vc_hidden-sm vc_hidden-xs">
-  <div class="menu">
+  <div class="menu" id="'.$menu_id.'">
     <ul>
       <li>
       	<a href="#">Sobre la RTRS</a>
@@ -86,7 +91,7 @@ echo '
 		</ul>
       </li>
       <li>
-      	<a href="#">Miembros</a>
+      	<a href="/miembros">Miembros</a>
       </li>
       <li>
       	<a href="#">Productores</a>
@@ -181,20 +186,31 @@ $tags=get_tags(array('hide_empty'=>false));
 							if( in_array( mfn_header_style(), array( 'header-split', 'header-split header-semi', 'header-below header-split' ) ) ){
 								mfn_wp_split_menu();
 							} else {
+								global $wp;
+								$rs_tm_left="rs-top-menu-left";
+								$rs_tm_right="rs-top-menu-right";
+								$rs_lang_menu="rs-lang-menu";
+								$rs_search="rs-search";
+								if(strpos(home_url($wp->request), "miembros")){
+									$rs_tm_left="rs-top-alt-left";
+									$rs_tm_right="rs-top-alt-right";
+									$rs_lang_menu="rs-lang-menu-alt";
+									$rs_search="rs-search-alt";
+								}
 								echo '
 								<div id="rs-top-menu" class="vc_hidden-sm vc_hidden-xs">
-									<div id="rs-top-menu-left">
+									<div id="'.$rs_tm_left.'">
 										<a href="#">Biblioteca</a> <span class="sep">|</span>
 										<a href="#">Acceda a la plataforma</a> <span class="sep">|</span>
 										<a href="#">Información del mercado</a>
 									</div>
-									<div id="rs-top-menu-right">
+									<div id="'.$rs_tm_right.'">
 										<a href="#" id="rs-btn-encuentre">ENCUENTRE</a>
-										<a href="#" id="rs-lang-menu">ES</a>
-										<div id="rs-search"></div>
+										<a href="#" id="'.$rs_lang_menu.'">ES</a>
+										<div id="'.$rs_search.'"></div>
 									</div>
 								</div>';
-								printMegaMenu();
+								echo printMegaMenu();
 								mfn_wp_nav_menu();
 							}
 
