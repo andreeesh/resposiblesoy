@@ -15,6 +15,14 @@
 li { vertical-align: middle !important; }
 .row-menu-footer { margin-top:40px; }
 .link-icon-download { background-image:url('/wp-content/uploads/2019/03/download-arrow.png'); background-repeat: no-repeat; background-position: center left; padding-left: 40px; margin-top:20px!important}
+.link-icon-download-yellow { background-image:url('/wp-content/uploads/2019/03/icon-down-yellow.png'); background-repeat: no-repeat; background-position: center left; padding-left: 40px; margin-top:20px!important; color:#BEBE07!important}
+#tabla-cuotas td, #tabla-cuotas th { text-align: left; background-color: #fff; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #707070; box-shadow: none; }
+#tabla-cuotas { width:100% !important}
+.lista-facultades li { border-bottom: 1px solid #707070; padding: 7px 0 13px 0; }
+.lista-facultades { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/03/list-image.png") !important; margin: 0 0 0 0 !important }
+
+.lista-reportes li { border-bottom: 1px solid #fff; padding: 7px 0 13px 0; }
+.lista-reportes { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/03/list-image-white.png") !important; margin: 0 0 0 0 !important }
 
 /*BLOQUES HOME*/
 .fondo-verde-bloque-home { background: #578721; }
@@ -234,8 +242,27 @@ font-size: 34px; color:#fff;}
 	/*TIPOS DE MEMBRESIAS*/
 	#row-tipos-de-membresias {padding-top:150px!important;padding-bottom:115px!important}
 	#inner-tipos-miembros { padding-top: 50px; }
+	/*CUOTAS DE MEMBRESIA*/
+	#row-cuotas-membresia { padding-top: 150px!important; padding-bottom:100px!important;}
+	#inner-title-cuotas-membresia { padding-bottom: 50px }
+	#bajada-cuotas-membresia { padding-bottom: 50px }
+	/*PROCESO DE ADMISION*/
+	#row-proceso-admision { padding-bottom:50px!important;}
+	#inner-title-proceso-admision { padding-bottom: 50px }
+	/*TOMA DE DECISIONES*/
+	#row-toma-decisiones {padding-bottom:50px!important;} 
+	#inner-title-toma-decisiones { padding-bottom: 50px }
+	/*FACULTADES DE LA ASAMBLEA*/
+	#row-facultades-asamblea {padding-bottom:100px!important;} 
+	#inner-title-facultades-asamblea { padding-bottom: 50px }
+	/*ASAMBLEA GENERAL*/
+	#row-asamblea-general { padding-top:60px; padding-bottom:60px}
+	#inner-asamblea { padding-top:50px; padding-bottom:50px}
+	/*REPORTES*/
+	#row-reportes { padding-top:150px; padding-bottom:150px}
+	#inner-title-reportes { padding-bottom: 50px }
 }
-
+ 
 @media (min-width: 768px) and (max-width: 991px){
 	#Top_bar .logo-mobile { margin: -10px 0 0 0 !important }
 	#Top_bar a.responsive-menu-toggle { right: 0px !important; }
