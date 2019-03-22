@@ -110,10 +110,10 @@ abstract class DUPX_Connectivity
 class DUPX_Bootstrap
 {
 	//@@ Params get dynamically swapped when package is built
-	const ARCHIVE_FILENAME	 = '20190121_responsiblesoy_fbb1b2b4f8a1e6ae8435_20190320174746_archive.zip';
-	const ARCHIVE_SIZE		 = '220484';
+	const ARCHIVE_FILENAME	 = '20190121_responsiblesoy_36b430c752a004f49106_20190322021303_archive.zip';
+	const ARCHIVE_SIZE		 = '234103';
 	const INSTALLER_DIR_NAME = 'dup-installer';
-	const PACKAGE_HASH		 = 'fbb1b2b-20174746';
+	const PACKAGE_HASH		 = '36b430c-22021303';
 	const VERSION			 = '1.3.4';
 
 	public $hasZipArchive     = false;
