@@ -91,7 +91,23 @@ return '
 		</ul>
       </li>
       <li>
-      	<a href="/miembros">Miembros</a>
+		  <a href="/miembros">Miembros</a>
+		  <ul>
+        	<li>
+	        	<div class="col-md-4">
+					<a href="#"><h2 class="h-mm">Ser Miembro RTRS</h2></a>
+					<a href="#"><h2 class="h-mm">Quiero ser Miembro</h2></a>
+					<a href="#"><h2 class="h-mm">Nuestros Miembros</h2></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#"><h2 class="h-mm">Membresía RTRS</h2></a>
+					<a href="#"><h2 class="h-mm">Reportes Anuales de Progreso</h2></a>
+				</div>
+				<div class="col-md-4">
+					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
+				</div>
+			</li>
+		</ul>
       </li>
       <li>
       	<a href="#">Productores</a>
