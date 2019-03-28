@@ -28,8 +28,7 @@ defined("ABSPATH") or die("");
 	}
 	
 	if (isset($_POST['dbpass'])) {
-		$post_db_pass = DUPX_U::wp_unslash($_POST['dbpass']);
-		$_POST['dbpass'] = trim($post_db_pass);
+		$_POST['dbpass'] = $_POST['dbpass'];
 	} else {
 		$_POST['dbpass'] = null;
 	}
@@ -272,6 +271,7 @@ VIEW: STEP 3- INPUT -->
 				</tr>
 			</table>
 			<br/>
+			<input type="checkbox" name="search_replace_email_domain" id="search_replace_email_domain" value="1" /> <label for="search_replace_email_domain">Update email domains</label><br/>
 			<input type="checkbox" name="fullsearch" id="fullsearch" value="1" /> <label for="fullsearch">Use Database Full Search Mode</label><br/>
 			<input type="checkbox" name="postguid" id="postguid" value="1" /> <label for="postguid">Keep Post GUID Unchanged</label><br/>
 			<br/><br/>

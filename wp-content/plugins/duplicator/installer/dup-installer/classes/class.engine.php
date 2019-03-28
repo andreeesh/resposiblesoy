@@ -150,6 +150,8 @@ class DUPX_UpdateEngine
             'err_all' => 0
         );
 
+        $nManager = DUPX_NOTICE_MANAGER::getInstance();
+        
 		function set_sql_column_safe(&$str) {
 			$str = "`$str`";
 		}
@@ -277,23 +279,28 @@ class DUPX_UpdateEngine
                                     }
                                 }
 
-                                //Replace logic - level 1: simple check on any string or serlized strings
-                                foreach ($list as $item) {
-									$objArr = array();
-                                    $edited_data = self::recursiveUnserializeReplace($item['search'], $item['replace'], $edited_data, false, $objArr);
-                                }
-
-                                //Replace logic - level 2: repair serialized strings that have become broken
-                                $serial_check = self::fixSerialString($edited_data);
-                                if ($serial_check['fixed']) {
-                                    $edited_data = $serial_check['data'];
-                                } elseif ($serial_check['tried'] && !$serial_check['fixed']) {
+                                if (self::isSerialized($edited_data) && strlen($edited_data) > MAX_STRLEN_SERIALIZED_CHECK) {
+                                     // skip search and replace for too big serialized string
                                     $serial_err++;
+                                } else {
+                                    //Replace logic - level 1: simple check on any string or serlized strings
+                                    foreach ($list as $item) {
+                                        $objArr = array();
+                                        $edited_data = self::recursiveUnserializeReplace($item['search'], $item['replace'], $edited_data, false, $objArr);
+                                    }
+
+                                    //Replace logic - level 2: repair serialized strings that have become broken
+                                    $serial_check = self::fixSerialString($edited_data);
+                                    if ($serial_check['fixed']) {
+                                        $edited_data = $serial_check['data'];
+                                    } elseif ($serial_check['tried'] && !$serial_check['fixed']) {
+                                        $serial_err++;
+                                    }
                                 }
                             }
 
                             //Change was made
-                            if ($edited_data != $data_to_fix || $serial_err > 0) {
+                            if ($serial_err > 0 || $edited_data != $data_to_fix) {
                                 $report['updt_cells']++;
                                 //Base 64 encode
                                 if ($base64converted) {
@@ -315,22 +322,46 @@ class DUPX_UpdateEngine
 							$result	= mysqli_query($conn, $sql);
                             if ($result) {
                                 if ($serial_err > 0) {
-                                    $report['errser'][] = "SELECT " . implode(', ',
+                                    $errMsg = "SELECT " . implode(', ',
                                             $upd_col) . " FROM `".mysqli_real_escape_string($conn, $table)."`  WHERE " . implode(' AND ',
                                             array_filter($where_sql)) . ';';
+                                    $report['errser'][] = $errMsg;
+
+                                    $nManager->addFinalReportNotice(array(
+                                        'shortMsg' => 'DATA-REPLACE ERROR: Serialization',
+                                        'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                        'longMsg' => $errMsg,
+                                        'sections' => 'search_replace'
+                                    ));
                                 }
                                 $report['updt_rows']++;
                             } else {
+                                $errMsg = mysqli_error($conn);
 								$report['errsql'][]	= ($GLOBALS['LOGGING'] == 1)
-									? 'DB ERROR: ' . mysqli_error($conn)
-									: 'DB ERROR: ' . mysqli_error($conn) . "\nSQL: [{$sql}]\n";
+									? 'DB ERROR: ' . $errMsg
+									: 'DB ERROR: ' . $errMsg . "\nSQL: [{$sql}]\n";
+
+                                $nManager->addFinalReportNotice(array(
+                                    'shortMsg' => 'DATA-REPLACE ERRORS: MySQL',
+                                    'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                    'longMsg' => $errMsg,
+                                    'sections' => 'search_replace'
+                                ));
 							}
 
 							//DEBUG ONLY:
                             DUPX_Log::info("\t{$sql}\n", 3);
 
                         } elseif ($upd) {
-                            $report['errkey'][] = sprintf("Row [%s] on Table [%s] requires a manual update.", $current_row, $table);
+                            $errMsg = sprintf("Row [%s] on Table [%s] requires a manual update.", $current_row, $table);
+                            $report['errkey'][] = $errMsg;
+
+                            $nManager->addFinalReportNotice(array(
+                                    'shortMsg' => 'DATA-REPLACE ERROR: Key',
+                                    'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                    'longMsg' => $errMsg,
+                                    'sections' => 'search_replace'
+                                ));
                         }
                     }
                     //DUPX_U::fcgiFlush();
@@ -346,12 +377,15 @@ class DUPX_UpdateEngine
         @mysqli_commit($conn);
         @mysqli_autocommit($conn, true);
 
+        $nManager->saveNotices();
+
         $profile_end = DUPX_U::getMicrotime();
         $report['time'] = DUPX_U::elapsedTime($profile_end, $profile_start);
         $report['errsql_sum'] = empty($report['errsql']) ? 0 : count($report['errsql']);
         $report['errser_sum'] = empty($report['errser']) ? 0 : count($report['errser']);
         $report['errkey_sum'] = empty($report['errkey']) ? 0 : count($report['errkey']);
         $report['err_all'] = $report['errsql_sum'] + $report['errser_sum'] + $report['errkey_sum'];
+
         return $report;
     }
 

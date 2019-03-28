@@ -163,6 +163,7 @@ class DUPX_U
 		 if (function_exists('get_headers')) {
 			$url =  is_integer($port) ? $url . ':' . $port 	: $url;
 			DUPX_Handler::$should_log = false;
+			@ini_set("default_socket_timeout", $timeout);
 			$headers = @get_headers($url);
 			DUPX_Handler::$should_log = true;
 			if (is_array($headers) && strpos($headers[0], '404') === false) {
@@ -170,7 +171,7 @@ class DUPX_U
 			}
 		} else {
 			if (function_exists('fsockopen')) {
-				@ini_set("default_socket_timeout", 5);
+				@ini_set("default_socket_timeout", $timeout);
 				$port = isset($port) && is_integer($port) ? $port : 80;
 				$host = parse_url($url, PHP_URL_HOST);
 				$connected = @fsockopen($host, $port, $errno, $errstr, $timeout); //website and port
@@ -183,7 +184,92 @@ class DUPX_U
 		return $exists;
     }
 
-	/**
+    /**
+     * move all folder content up to parent
+     *
+     * @param string $subFolderName full path
+     * @param boolean $deleteSubFolder if true delete subFolder after moved all
+     * @return boolean
+     * 
+     */
+    public static function moveUpfromSubFolder($subFolderName, $deleteSubFolder = false)
+    {
+        if (!is_dir($subFolderName)) {
+            return false;
+        }
+
+        $parentFolder = dirname($subFolderName);
+        if (!is_writable($parentFolder)) {
+            return false;
+        }
+
+        $success = true;
+        if (($subList = glob(rtrim($subFolderName, '/').'/*', GLOB_NOSORT)) === false) {
+            DUPX_Log::info("Problem glob folder ".$subFolderName);
+            return false;
+        } else {
+            foreach ($subList as $cName) {
+                $destination = $parentFolder.'/'.basename($cName);
+                if (file_exists($destination)) {
+                    $success = self::deletePath($destination);
+                }
+
+                if ($success) {
+                    $success = rename($cName, $destination);
+                } else {
+                    break;
+                }
+            }
+
+            if ($success && $deleteSubFolder) {
+                $success = self::deleteDirectory($subFolderName, true);
+            }
+        }
+
+        if (!$success) {
+            DUPX_Log::info("Problem om moveUpfromSubFolder subFolder:".$subFolderName);
+        }
+
+        return $success;
+    }
+
+    /**
+     * @param string $archive_filepath  full path of zip archive
+     * 
+     * @return boolean|string  path of dup-installer folder of false if not found
+     */
+    public static function findDupInstallerFolder($archive_filepath)
+    {
+        $zipArchive = new ZipArchive();
+        $result     = false;
+
+        if ($zipArchive->open($archive_filepath) === true) {
+            for ($i = 0; $i < $zipArchive->numFiles; $i++) {
+                $stat     = $zipArchive->statIndex($i);
+                $safePath = rtrim(self::setSafePath($stat['name']), '/');
+                if (substr_count($safePath, '/') > 2) {
+                    continue;
+                }
+
+                $exploded = explode('/',$safePath);
+                if (($dup_index = array_search('dup-installer' , $exploded)) !== false) {
+                    $result = implode('/' , array_slice($exploded , 0 , $dup_index));
+                    break;
+                }
+            }
+            if ($zipArchive->close() !== true) {
+                DUPX_Log::info("Can't close ziparchive:".$archive_filepath);
+                return false;
+            }
+        } else {
+            DUPX_Log::info("Can't open zip archive:".$archive_filepath);
+            return false;
+        }
+
+        return $result;
+    }
+
+    /**
 	 *  A safe method used to copy larger files
 	 *
 	 * @param string $source		The path to the file being copied
@@ -206,42 +292,67 @@ class DUPX_U
 	}
 
 	/**
-	 * Safely remove a directory and recursively if needed
-	 *
-	 * @param string $directory The full path to the directory to remove
-	 * @param string $recursive recursively remove all items
-	 *
-	 * @return bool Returns true if all content was removed
-	 */
-	public static function deleteDirectory($directory, $recursive)
-	{
-		$success = true;
+     * Safely remove a directory and recursively if needed
+     *
+     * @param string $directory The full path to the directory to remove
+     * @param string $recursive recursively remove all items
+     *
+     * @return bool Returns true if all content was removed
+     */
+    public static function deleteDirectory($directory, $recursive)
+    {
+        $success = true;
 
-		if ($excepted_subdirectories = null) {
-			$excepted_subdirectories = array();
-		}
+        $filenames = array_diff(scandir($directory), array('.', '..'));
 
-		$filenames = array_diff(scandir($directory), array('.', '..'));
+        foreach ($filenames as $filename) {
+            $fullPath = $directory.'/'.$filename;
 
-		foreach ($filenames as $filename) {
-			if (is_dir("$directory/$filename")) {
-				if ($recursive) {
-					$success = self::deleteDirectory("$directory/$filename", true);
-				}
-			} else {
-				$success = @unlink("$directory/$filename");
-			}
+            if (is_dir($fullPath)) {
+                if ($recursive) {
+                    $success = self::deleteDirectory($fullPath, true);
+                }
+            } else {
+                $success = @unlink($fullPath);
+                if ($success === false) {
+                    DUPX_Log::info( __FUNCTION__.": Problem deleting file:".$fullPath);
+                }
+            }
 
-			if ($success === false) {
-				//self::log("Problem deleting $directory/$filename");
-				break;
-			}
-		}
+            if ($success === false) {
+                DUPX_Log::info("Problem deleting dir:".$directory);
+                break;
+            }
+        }
 
-		return $success && rmdir($directory);
-	}
+        return $success && rmdir($directory);
+    }
 
-	/**
+    /**
+     * Safely remove a file or directory and recursively if needed
+     *
+     * @param string $directory The full path to the directory to remove
+     *
+     * @return bool Returns true if all content was removed
+     */
+    public static function deletePath($path)
+    {
+        $success = true;
+
+        if (is_dir($path)) {
+            $success = self::deleteDirectory($path, true);
+        } else {
+            $success = @unlink($path);
+
+            if ($success === false) {
+                DUPX_Log::info( __FUNCTION__.": Problem deleting file:".$path);
+            }
+        }
+
+        return $success;
+    }
+
+    /**
 	 * Dumps a variable for debugging
 	 *
 	 * @param string $var The variable to view
@@ -542,23 +653,30 @@ class DUPX_U
 
     /**
      * @param $url string The URL whichs domain you want to get
-     * @return bool|string The domain part of the given URL
+     * @return string The domain part of the given URL
+     *                  www.myurl.co.uk     => myurl.co.uk
+     *                  www.google.com      => google.com
+     *                  my.test.myurl.co.uk => myurl.co.uk
+     *                  www.myurl.localweb  => myurl.localweb
+     *
      */
     public static function getDomain($url)
     {
         $pieces = parse_url($url);
         $domain = isset($pieces['host']) ? $pieces['host'] : '';
-        if(strpos($domain,".") !== false){
+        if (strpos($domain, ".") !== false) {
             if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
                 return $regs['domain'];
+            } else {
+                $exDomain = explode('.', $domain);
+                return implode('.', array_slice($exDomain, -2, 2));
             }
-        }else{
+        } else {
             return $domain;
         }
+    }
 
-        return false;
-	}
-	// START ESCAPING AND SANITIZATION
+    // START ESCAPING AND SANITIZATION
 	/**
 	 * Escaping for HTML blocks.
 	 *

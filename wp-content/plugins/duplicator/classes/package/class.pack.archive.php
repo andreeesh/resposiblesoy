@@ -21,30 +21,31 @@ require_once (DUPLICATOR_PLUGIN_PATH.'lib/forceutf8/Encoding.php');
  */
 class DUP_Archive
 {
-	//PUBLIC
-	public $FilterDirs;
-	public $FilterFiles;
-	public $FilterExts;
-	public $FilterDirsAll	 = array();
-	public $FilterFilesAll	 = array();
-	public $FilterExtsAll	 = array();
-	public $FilterOn;
-	public $ExportOnlyDB;
-	public $File;
-	public $Format;
-	public $PackDir;
-	public $Size			 = 0;
-	public $Dirs			 = array();
-	public $Files			 = array();
-	public $FilterInfo;
-	public $RecursiveLinks	 = array();
-	//PROTECTED
-	protected $Package;
-	private $tmpFilterDirsAll	 = array();
-	private $wpCorePaths		 = array();
-	private $wpCoreExactPaths	 = array();
+    //PUBLIC
+    public $FilterDirs;
+    public $FilterFiles;
+    public $FilterExts;
+    public $FilterDirsAll     = array();
+    public $FilterFilesAll    = array();
+    public $FilterExtsAll     = array();
+    public $FilterOn;
+    public $ExportOnlyDB;
+    public $File;
+    public $Format;
+    public $PackDir;
+    public $Size              = 0;
+    public $Dirs              = array();
+    public $Files             = array();
+    public $FilterInfo;
+    public $RecursiveLinks    = array();
+    public $file_count        = -1;
+    //PROTECTED
+    protected $Package;
+    private $tmpFilterDirsAll = array();
+    private $wpCorePaths      = array();
+    private $wpCoreExactPaths = array();
 
-	/**
+    /**
 	 *  Init this object
 	 */
 	public function __construct($package)
@@ -126,7 +127,28 @@ class DUP_Archive
 		}
 	}
 
-	/**
+    /**
+     *
+     * @return int return  DUP_Archive_Build_Mode
+     */
+    public function getBuildMode()
+    {
+        switch ($this->Format) {
+            case 'TAR': break;
+            case 'TAR-GZIP': break;
+            case 'DAF':
+                return DUP_Archive_Build_Mode::DupArchive;
+            default:
+                if (class_exists('ZipArchive')) {
+                    return DUP_Archive_Build_Mode::ZipArchive;
+                } else {
+                    return DUP_Archive_Build_Mode::Unconfigured;
+                }
+                break;
+        }
+    }
+
+    /**
 	 *  Builds a list of files and directories to be included in the archive
 	 *
 	 *  Get the directory size recursively, but don't calc the snapshot directory, exclusion directories
@@ -140,6 +162,7 @@ class DUP_Archive
 		$rootPath	 = DUP_Util::safePath(rtrim(DUPLICATOR_WPROOTPATH, '//'));
 		$rootPath	 = (trim($rootPath) == '') ? '/' : $rootPath;
 
+		$this->RecursiveLinks = array();
 		//If the root directory is a filter then skip it all
 		if (in_array($this->PackDir, $this->FilterDirsAll) || $this->Package->Archive->ExportOnlyDB) {
 			$this->Dirs = array();
@@ -356,146 +379,152 @@ class DUP_Archive
 	}
 
 	/**
-	 * Get All Directories then filter
-	 *
-	 * @return null
-	 */
-	private function setDirFilters()
-	{
-		$this->FilterInfo->Dirs->Warning	 = array();
-		$this->FilterInfo->Dirs->Unreadable	 = array();
-		$this->FilterInfo->Dirs->AddonSites	 = array();
+     * Get All Directories then filter
+     *
+     * @return null
+     */
+    private function setDirFilters()
+    {
+        $this->FilterInfo->Dirs->Warning    = array();
+        $this->FilterInfo->Dirs->Unreadable = array();
+        $this->FilterInfo->Dirs->AddonSites = array();
+        $skip_archive_scan                  = DUP_Settings::Get('skip_archive_scan');
 
-		$utf8_key_list	 = array();
-		$unset_key_list	 = array();
+        $utf8_key_list  = array();
+        $unset_key_list = array();
 
-		//Filter directories invalid test checks for:
-		// - characters over 250
-		// - invlaid characters
-		// - empty string
-		// - directories ending with period (Windows incompatable)
-		foreach ($this->Dirs as $key => $val) {
-			$name = basename($val);
+        //Filter directories invalid test checks for:
+        // - characters over 250
+        // - invlaid characters
+        // - empty string
+        // - directories ending with period (Windows incompatable)
+        foreach ($this->Dirs as $key => $val) {
+            $name = basename($val);
 
-			//Dir is not readble remove flag for removal
-			if (!is_readable($this->Dirs[$key])) {
-				$unset_key_list[]						 = $key;
-				$this->FilterInfo->Dirs->Unreadable[]	 = DUP_Encoding::toUTF8($val);
-			}
+            //Dir is not readble remove flag for removal
+            if (!is_readable($this->Dirs[$key])) {
+                $unset_key_list[]                     = $key;
+                $this->FilterInfo->Dirs->Unreadable[] = DUP_Encoding::toUTF8($val);
+            }
 
-			//Locate invalid directories and warn
-			$invalid_test = strlen($val) > 244 || preg_match('/(\/|\*|\?|\>|\<|\:|\\|\|)/', $name) || trim($name) == '' || (strrpos($name, '.') == strlen($name) - 1 && substr($name, -1) == '.') || preg_match('/[^\x20-\x7f]/',
-					$name);
+            if (!$skip_archive_scan) {
+                //Locate invalid directories and warn
+                $invalid_test = strlen($val) > PHP_MAXPATHLEN || preg_match('/(\/|\*|\?|\>|\<|\:|\\|\|)/', $name) || trim($name) == '' || (strrpos($name, '.') == strlen($name) - 1 && substr($name, -1)
+                    == '.') || preg_match('/[^\x20-\x7f]/', $name);
 
-			if ($invalid_test) {
-				$utf8_key_list[]					 = $key;
-				$this->FilterInfo->Dirs->Warning[]	 = DUP_Encoding::toUTF8($val);
-			}
+                if ($invalid_test) {
+                    $utf8_key_list[]                   = $key;
+                    $this->FilterInfo->Dirs->Warning[] = DUP_Encoding::toUTF8($val);
+                }
+            }
 
-			//Check for other WordPress installs
-			if ($name === 'wp-admin') {
-				$parent_dir = realpath(dirname($this->Dirs[$key]));
-				if ($parent_dir != realpath(DUPLICATOR_WPROOTPATH)) {
-					if (file_exists("$parent_dir/wp-includes")) {
-						if (file_exists("$parent_dir/wp-config.php")) {
-							// Ensure we aren't adding any critical directories
-							$parent_name = basename($parent_dir);
-							if (($parent_name != 'wp-includes') && ($parent_name != 'wp-content') && ($parent_name != 'wp-admin')) {
-								$this->FilterInfo->Dirs->AddonSites[] = str_replace("\\", '/', $parent_dir);
-							}
-						}
-					}
-				}
-			}
-		}
+            //Check for other WordPress installs
+            if ($name === 'wp-admin') {
+                $parent_dir = realpath(dirname($this->Dirs[$key]));
+                if ($parent_dir != realpath(DUPLICATOR_WPROOTPATH)) {
+                    if (file_exists("$parent_dir/wp-includes")) {
+                        if (file_exists("$parent_dir/wp-config.php")) {
+                            // Ensure we aren't adding any critical directories
+                            $parent_name = basename($parent_dir);
+                            if (($parent_name != 'wp-includes') && ($parent_name != 'wp-content') && ($parent_name != 'wp-admin')) {
+                                $this->FilterInfo->Dirs->AddonSites[] = str_replace("\\", '/', $parent_dir);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		//Try to repair utf8 paths
-		foreach ($utf8_key_list as $key) {
-			$this->Dirs[$key] = DUP_Encoding::toUTF8($this->Dirs[$key]);
-		}
+        //Try to repair utf8 paths
+        foreach ($utf8_key_list as $key) {
+            $this->Dirs[$key] = DUP_Encoding::toUTF8($this->Dirs[$key]);
+        }
 
-		//Remove unreadable items outside of main loop for performance
-		if (count($unset_key_list)) {
-			foreach ($unset_key_list as $key) {
-				unset($this->Dirs[$key]);
-			}
-			$this->Dirs = array_values($this->Dirs);
-		}
-	}
+        //Remove unreadable items outside of main loop for performance
+        if (count($unset_key_list)) {
+            foreach ($unset_key_list as $key) {
+                unset($this->Dirs[$key]);
+            }
+            $this->Dirs = array_values($this->Dirs);
+        }
+    }
 
-	/**
-	 * Get all files and filter out error prone subsets
-	 *
-	 * @return null
-	 */
-	private function setFileFilters()
-	{
-		//Init for each call to prevent concatination from stored entity objects
-		$this->Size							 = 0;
-		$this->FilterInfo->Files->Size		 = array();
-		$this->FilterInfo->Files->Warning	 = array();
-		$this->FilterInfo->Files->Unreadable = array();
+    /**
+     * Get all files and filter out error prone subsets
+     *
+     * @return null
+     */
+    private function setFileFilters()
+    {
+        //Init for each call to prevent concatination from stored entity objects
+        $this->Size                          = 0;
+        $this->FilterInfo->Files->Size       = array();
+        $this->FilterInfo->Files->Warning    = array();
+        $this->FilterInfo->Files->Unreadable = array();
+        $skip_archive_scan                   = DUP_Settings::Get('skip_archive_scan');
 
-		$utf8_key_list	 = array();
-		$unset_key_list	 = array();
+        $utf8_key_list  = array();
+        $unset_key_list = array();
 
-		$wpconfig_filepath = $this->getWPConfigFilePath();
-		if (!is_readable($wpconfig_filepath)) {
-			$this->FilterInfo->Files->Unreadable[] = $wpconfig_filepath;
-		}
+        $wpconfig_filepath = $this->getWPConfigFilePath();
+        if (!is_readable($wpconfig_filepath)) {
+            $this->FilterInfo->Files->Unreadable[] = $wpconfig_filepath;
+        }
 
-		foreach ($this->Files as $key => $filePath) {
+        foreach ($this->Files as $key => $filePath) {
 
-			$fileName = basename($filePath);
+            $fileName = basename($filePath);
 
-			if (!is_readable($filePath)) {
-				$unset_key_list[]						 = $key;
-				$this->FilterInfo->Files->Unreadable[]	 = $filePath;
-				continue;
-			}
+            if (!is_readable($filePath)) {
+                $unset_key_list[]                      = $key;
+                $this->FilterInfo->Files->Unreadable[] = $filePath;
+                continue;
+            }
 
-			$invalid_test = strlen($filePath) > 250 || preg_match('/(\/|\*|\?|\>|\<|\:|\\|\|)/', $fileName) || trim($fileName) == "" || preg_match('/[^\x20-\x7f]/', $fileName);
+            $fileSize   = @filesize($filePath);
+            $fileSize   = empty($fileSize) ? 0 : $fileSize;
+            $this->Size += $fileSize;
 
-			if ($invalid_test) {
-				$utf8_key_list[]					 = $key;
-				$filePath							 = DUP_Encoding::toUTF8($filePath);
-				$fileName							 = basename($filePath);
-				$this->FilterInfo->Files->Warning[]	 = array(
-					'name' => $fileName,
-					'dir' => pathinfo($filePath, PATHINFO_DIRNAME),
-					'path' => $filePath);
-			}
+            if (!$skip_archive_scan) {
+                $invalid_test = strlen($filePath) > PHP_MAXPATHLEN || preg_match('/(\/|\*|\?|\>|\<|\:|\\|\|)/', $fileName) || trim($fileName) == "" || preg_match('/[^\x20-\x7f]/', $fileName);
 
-			$fileSize	 = @filesize($filePath);
-			$fileSize	 = empty($fileSize) ? 0 : $fileSize;
-			$this->Size	 += $fileSize;
+                if ($invalid_test) {
+                    $utf8_key_list[]                    = $key;
+                    $filePath                           = DUP_Encoding::toUTF8($filePath);
+                    $fileName                           = basename($filePath);
+                    $this->FilterInfo->Files->Warning[] = array(
+                        'name' => $fileName,
+                        'dir' => pathinfo($filePath, PATHINFO_DIRNAME),
+                        'path' => $filePath);
+                }
 
-			if ($fileSize > DUPLICATOR_SCAN_WARNFILESIZE) {
-				//$ext = pathinfo($filePath, PATHINFO_EXTENSION);
-				$this->FilterInfo->Files->Size[] = array(
-					'ubytes' => $fileSize,
-					'bytes' => DUP_Util::byteSize($fileSize, 0),
-					'name' => $fileName,
-					'dir' => pathinfo($filePath, PATHINFO_DIRNAME),
-					'path' => $filePath);
-			}
-		}
+                if ($fileSize > DUPLICATOR_SCAN_WARNFILESIZE) {
+                    //$ext = pathinfo($filePath, PATHINFO_EXTENSION);
+                    $this->FilterInfo->Files->Size[] = array(
+                        'ubytes' => $fileSize,
+                        'bytes' => DUP_Util::byteSize($fileSize, 0),
+                        'name' => $fileName,
+                        'dir' => pathinfo($filePath, PATHINFO_DIRNAME),
+                        'path' => $filePath);
+                }
+            }
+        }
 
-		//Try to repair utf8 paths
-		foreach ($utf8_key_list as $key) {
-			$this->Files[$key] = DUP_Encoding::toUTF8($this->Files[$key]);
-		}
+        //Try to repair utf8 paths
+        foreach ($utf8_key_list as $key) {
+            $this->Files[$key] = DUP_Encoding::toUTF8($this->Files[$key]);
+        }
 
-		//Remove unreadable items outside of main loop for performance
-		if (count($unset_key_list)) {
-			foreach ($unset_key_list as $key) {
-				unset($this->Files[$key]);
-			}
-			$this->Files = array_values($this->Files);
-		}
-	}
+        //Remove unreadable items outside of main loop for performance
+        if (count($unset_key_list)) {
+            foreach ($unset_key_list as $key) {
+                unset($this->Files[$key]);
+            }
+            $this->Files = array_values($this->Files);
+        }
+    }
 
-	/**
+    /**
 	 * Recursive function to get all directories in a wp install
 	 *
 	 * @notes:
@@ -509,8 +538,7 @@ class DUP_Archive
 	 *
 	 * @return array	Returns an array of directories to include in the archive
 	 */
-	private function getFileLists($path)
-	{
+	private function getFileLists($path) {
 		$handle = @opendir($path);
 
 		if ($handle) {
@@ -520,59 +548,54 @@ class DUP_Archive
 					continue;
 				}
 
-				$fullPath		 = str_replace("\\", '/', "{$path}/{$file}");
-				$relative_path	 = $fullPath;
+				$fullPath = str_replace("\\", '/', "{$path}/{$file}");
 
-				if (is_link($relative_path)) {
-					$is_link = true;
+				// @todo: Don't leave it like this. Convert into an option on the package to not follow symbolic links
+				// if (is_dir($fullPath) && (is_link($fullPath) == false))
+				if (is_dir($fullPath)) {
 
-					//Convert relative path of link to absolute path
-					chdir($relative_path);
-					$real_path = realpath(readlink($relative_path));
-					chdir(dirname(__FILE__));
-				} else {
-					$is_link	 = false;
-					$real_path	 = realpath($relative_path);
-				}
+                    $add = true;
+                    if (!is_link($fullPath)){
+                        foreach ($this->tmpFilterDirsAll as $key => $val) {
+                            $trimmedFilterDir = rtrim($val, '/');
+                            if ($fullPath == $trimmedFilterDir || strpos($fullPath, $trimmedFilterDir . '/') !== false) {
+                                $add = false;
+                                unset($this->tmpFilterDirsAll[$key]);
+                                break;
+                            }
+                        }
+                    } else{
+                        //Convert relative path of link to absolute path
+                        chdir($fullPath);
+						$link_path = str_replace("\\", '/', realpath(readlink($fullPath)));
+                        chdir(dirname(__FILE__));
 
-				$exclude_check = array_unique(array($real_path, $relative_path));
-
-				if (is_dir($real_path)) {
-					$exclude = false;
-
-					foreach ($this->tmpFilterDirsAll as $key => $val) {
-						$trimmedFilterDir = rtrim($val, '/');
-						foreach ($exclude_check as $c_check) {
-							if ($c_check == $trimmedFilterDir || strpos($c_check, $trimmedFilterDir.'/') !== false) {
-								$exclude = true;
-								unset($this->tmpFilterDirsAll[$key]);
-								break 2;
+                        $link_pos = strpos($fullPath,$link_path);
+                        if($link_pos === 0 && (strlen($link_path) <  strlen($fullPath))){
+                            $add = false;
+                            $this->RecursiveLinks[] = $fullPath;
+                            $this->FilterDirsAll[] = $fullPath;
+                        } else {
+							foreach ($this->tmpFilterDirsAll as $key => $val) {
+								$trimmedFilterDir = rtrim($val, '/');
+								if ($fullPath == $trimmedFilterDir || strpos($fullPath, $trimmedFilterDir . '/') !== false) {
+									$add = false;
+									unset($this->tmpFilterDirsAll[$key]);
+									break;
+								}
 							}
 						}
-					}
+                    }
 
-					if (!$exclude) {
-						if ($is_link) {
-							$this->RecursiveLinks[] = $relative_path;
-						}
-
-						$this->getFileLists($relative_path);
-						$this->Dirs[] = $relative_path;
-					}
+                    if ($add) {
+                        $this->getFileLists($fullPath);
+                        $this->Dirs[] = $fullPath;
+                    }
 				} else {
-					$exclude = false;
-					if (in_array(pathinfo($file, PATHINFO_EXTENSION), $this->FilterExtsAll) || in_array($file, $this->FilterFilesAll)) {
-						$exclude = true;
-					} else {
-						foreach ($exclude_check as $c_check) {
-							if (in_array($c_check, $this->FilterFilesAll)) {
-								$exclude = true;
-								break;
-							}
-						}
-					}
-					if (!$exclude) {
-						$this->Files[] = $relative_path;
+					if ( ! (in_array(pathinfo($file, PATHINFO_EXTENSION), $this->FilterExtsAll)
+						|| in_array($fullPath, $this->FilterFilesAll)
+						|| in_array($file, $this->FilterFilesAll))) {
+						$this->Files[] = $fullPath;
 					}
 				}
 			}

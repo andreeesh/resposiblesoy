@@ -73,6 +73,13 @@ if ($GLOBALS['DUPX_AC']->exportOnlyDB) {
 						? 'Good' 
 						: 'Warn';
 }
+
+$space_free = @disk_free_space($GLOBALS['DUPX_ROOT']); 
+$archive_size = filesize($GLOBALS['FW_PACKAGE_PATH']);
+$notice['100'] = ($space_free && $archive_size > $space_free) 
+                    ? 'Warn'
+					: 'Good';
+
 $all_notice	  = in_array('Warn', $notice)			? 'Warn' : 'Good';
 
 //SUMMATION
@@ -91,7 +98,7 @@ $archive_config  = DUPX_ArchiveConfig::getInstance();
 <input type="hidden" name="view" value="step1" />
 <input type="hidden" name="csrf_token" value="<?php echo DUPX_CSRF::generate('step1'); ?>"> 
 <input type="hidden" name="ctrl_action" value="ctrl-step1" />
-<input type="hidden" name="ctrl_csrf_token" value="<?php echo DUPX_CSRF::generate('ctrl-step1'); ?>"> 
+<input type="hidden" name="ctrl_csrf_token" value="<?php echo DUPX_U::esc_attr(DUPX_CSRF::generate('ctrl-step1')); ?>"> 
 <input type="hidden" name="secure-pass" value="<?php echo DUPX_U::esc_html($_POST['secure-pass']); ?>" />
 <input type="hidden" name="bootloader" value="<?php echo DUPX_U::esc_attr($GLOBALS['BOOTLOADER_NAME']); ?>" />
 <input type="hidden" name="archive" value="<?php echo DUPX_U::esc_attr($GLOBALS['FW_PACKAGE_PATH']); ?>" />
@@ -457,7 +464,7 @@ VALIDATION
 			<b>Open BaseDir:</b> <i><?php echo $notice['50'] == 'Good' ? "<i class='dupx-pass'>Disabled</i>" : "<i class='dupx-fail'>Enabled</i>"; ?></i>
 			<br/><br/>
 
-			If <a href="http://www.php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank">open_basedir</a> is enabled and your
+			If <a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank">open_basedir</a> is enabled and your
 			having issues getting your site to install properly; please work with your host and follow these steps to prevent issues:
 			<ol style="margin:7px; line-height:19px">
 				<li>Disable the open_basedir setting in the php.ini file</li>
@@ -527,6 +534,18 @@ VALIDATION
 			Duplicator Installer will place this wp-content directory in the WordPress setup root folder of this installation site. It will not break anything in your installation
 			site. It is just for your information.
 		</div>
+
+		<!-- NOTICE 100 -->
+		<div class="status <?php echo ($notice['100'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo DUPX_U::esc_html($notice['100']); ?></div>
+		<div class="title" data-type="toggle" data-target="#s1-notice100"><i class="fa fa-caret-right"></i> Sufficient disk space</div>
+		<div class="info" id="s1-notice100">
+        <?php
+        echo ($notice['100'] == 'Good')
+                ? 'You have sufficient disk space in your machine to extract the archive.'
+                : 'You don’t have sufficient disk space in your machine to extract the archive. Ask your host to increase disk space.'
+        ?>
+		</div>
+
 	</div>
 
 </div>
@@ -909,7 +928,6 @@ DUPX.pingDAWS = function ()
 	}
 
 	console.log("pingDAWS:action=" + request.action);
-	console.log("daws url=" + DUPX.DAWS.Url);
 
 	$.ajax({
 		type: "POST",
@@ -1038,21 +1056,6 @@ DUPX.kickOffDupArchiveExtract = function ()
 	var request = new Object();
 	var isClientSideKickoff = DUPX.isClientSideKickoff();
 
-	<?php
-	$outer_root_path = dirname($root_path);
-	if (!$GLOBALS['DUPX_AC']->installSiteOverwriteOn && (file_exists($root_path.'/wp-config.php') || (@file_exists($outer_root_path.'/wp-config.php') && !@file_exists("{$outer_root_path}/wp-settings.php")))) {
-		?>
-		$('#s1-input-form').hide();
-		$('#s1-result-form').show();
-		var errorString = "<div class='dupx-ui-error'><b style='color:#B80000;'>INSTALL ERROR!</b><br/>"+'<?php echo ERR_CONFIG_FOUND;?>'+"</div>";
-		$('#ajaxerr-data').html(errorString);
-		DUPX.hideProgressBar();
-		return false;
-		<?php
-	}
-	?>
-	
-
 	request.action = "start_expand";
 	request.archive_filepath = '<?php echo DUPX_U::esc_js($archive_path); ?>';
 	request.restore_directory = '<?php echo DUPX_U::esc_js($root_path); ?>';
@@ -1082,7 +1085,7 @@ DUPX.kickOffDupArchiveExtract = function ()
 	$.ajax({
 		type: "POST",
 		timeout: DUPX.DAWS.KickoffWorkerTimeInSec * 2000,  // Double worker time and convert to ms
-		url: DUPX.DAWS.Url,
+		url: DUPX.DAWS.Url + '&daws_action=start_expand',
 		data: requestString,
 		beforeSend: function () {
 			DUPX.showProgressBar();
@@ -1132,9 +1135,14 @@ DUPX.kickOffDupArchiveExtract = function ()
 					DUPX.DAWSProcessingFailed(errorString);
 				}
 			} else {
-				var errorString = 'kickOffDupArchiveExtract:Error Processing Step 1<br/>';
-				errorString += data.error;
-				DUPX.handleDAWSProcessingProblem(errorString, false);
+				if ('undefined' !== typeof data.isWPAlreadyExistsError
+				&& data.isWPAlreadyExistsError) {
+					DUPX.DAWSProcessingFailed(data.error);
+				} else {
+					var errorString = 'kickOffDupArchiveExtract:Error Processing Step 1<br/>';
+					errorString += data.error;
+					DUPX.handleDAWSProcessingProblem(errorString, false);
+				}
 			}
 		},
 		error: function (xHr, textStatus) {
@@ -1349,15 +1357,9 @@ DUPX.onSafeModeSwitch = function ()
 };
 
 //DOCUMENT LOAD
-$(document).ready(function ()
-{
-    DUPX.FILEOPS = new Object();
-
-    DUPX.FILEOPS.url = document.URL.substr(0, document.URL.lastIndexOf('/')) + '/lib/fileops/fileops.php';
-    DUPX.FILEOPS.standardTimeoutInSec = 25;
-
+$(document).ready(function() {
 	DUPX.DAWS = new Object();
-	DUPX.DAWS.Url = document.URL.substr(0,document.URL.lastIndexOf('/')) + '/lib/dup_archive/daws/daws.php';
+	DUPX.DAWS.Url = window.location.href + '?is_daws=1&daws_csrf_token=<?php echo urlencode(DUPX_CSRF::generate('daws'));?>';
 	DUPX.DAWS.StatusPeriodInMS = 5000;
 	DUPX.DAWS.PingWorkerTimeInSec = 9;
 	DUPX.DAWS.KickoffWorkerTimeInSec = 6; // Want the initial progress % to come back quicker
@@ -1373,8 +1375,15 @@ $(document).ready(function ()
 	$("*[data-type='toggle']").click(DUPX.toggleClick);
 	$("#tabs").tabs();
 	DUPX.acceptWarning();
-	$('#set_file_perms').trigger("click");
-	$('#set_dir_perms').trigger("click");
+	<?php
+    $isWindows = DUPX_U::isWindows();
+    if (!$isWindows) {
+    ?>
+		$('#set_file_perms').trigger("click");
+		$('#set_dir_perms').trigger("click");
+	<?php
+    }
+    ?>
 	DUPX.toggleSetupType();
 
 	<?php echo ($arcCheck == 'Fail') ? "$('#s1-area-archive-file-link').trigger('click');" : ""; ?>
