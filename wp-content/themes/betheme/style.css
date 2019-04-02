@@ -23,7 +23,11 @@ li { vertical-align: middle !important; }
 
 .lista-reportes li { border-bottom: 1px solid #fff; padding: 7px 0 13px 0; }
 .lista-reportes { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/03/list-image-white.png") !important; margin: 0 0 0 0 !important }
+.members-filters { margin-top:80px}
 
+/*Members search*/
+.select-members { border: none !important; border-bottom: 1px solid #83836C !important; box-shadow: none !important; font-size:18px !important; padding: 0 0 10px 0 }
+.members-filters { padding-bottom: 50px }
 /*BLOQUES HOME*/
 .fondo-verde-bloque-home { background: #578721; }
 .fondo-bloque-home-uno { background: url(/wp-content/uploads/2019/02/tractor-miembros.jpg) no-repeat center; background-size: cover }
@@ -265,6 +269,8 @@ h2 { line-height: 42px !important }
 	/*REPORTES*/
 	#row-reportes { padding-top:150px; padding-bottom:150px}
 	#inner-title-reportes { padding-bottom: 50px }
+	/*NUESTROS MIEMBROS*/
+	#row-nuestros-miembros { padding-top: 80px; padding-bottom: 80px }
 }
  
 @media (min-width: 768px) and (max-width: 991px){
