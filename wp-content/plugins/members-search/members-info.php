@@ -81,7 +81,7 @@ if($members->have_posts()):?>
                                                 $report=get_post();
                                                 $report_title=get_post_custom_values('wpcf-titulo-reporte', $report->ID);
                                                 $report_file=get_post_custom_values('wpcf-archivo', $report->ID);?>
-                                                <div class="item-members-info">Archivo: 
+                                                <div class="item-members-info">Archivos: 
                                                     <a target="_blank" href="<?=$report_file[0]?>"><?=$report_title[0]?></a>
                                                 </div>
                                             <?php
