@@ -34,7 +34,7 @@ function miembros_shortcode($atts)
     
     echo '
     <div class="row members-filters">
-        <div class="col-lg-3">';
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">';
             if($members->have_posts()):?>
                 <select name="members" id="members" class="select-members">
                     <option value="" selected>Nombre</option>
@@ -51,7 +51,7 @@ function miembros_shortcode($atts)
             endif;
     echo 
        '</div>
-        <div class="col-lg-3">';
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">';
             if($states->have_posts()):?>
                 <select name="states" id="states" class="select-members">
                     <option value="" selected>Estamento</option>
@@ -68,7 +68,7 @@ function miembros_shortcode($atts)
             endif;
     echo 
        '</div>
-        <div class="col-lg-3">';
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">';
             if($countries->have_posts()):?>
                 <select name="countries" id="countries" class="select-members">
                     <option value="" selected>País</option>
@@ -85,7 +85,7 @@ function miembros_shortcode($atts)
             endif;
     echo 
        '</div>
-        <div class="col-lg-3">';
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">';
             if(!empty($reports)):?>
                 <select name="reports" id="reports" class="select-members">
                     <option value="" selected>Reportes anuales</option>

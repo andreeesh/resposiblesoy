@@ -1,3 +1,16 @@
+.wpb_wrapper > div { margin-bottom: 0 !important }
+.hide { display: none !important }
+.show { display: block !important }
+.members-info-body { padding: 30px 30px 0 30px !important; background-color: #578821 !important; color: #fff !important; }
+.item-members-info { padding-bottom:20px}
+.members-about { padding: 20px 0 40px 0}
+.item-members-info a { color: #fff !important}
+.img-member-tab { padding-top: 15px !important; padding-bottom: 15px !important }
+.back-green { background-color: #578821 !important }
+.back-trans { background-color: transparent !important }
+.vc_tta-tabs-container .vc_active { background-color: #578821 !important }
+.link-member-tab { padding-top: 15px; padding-bottom:10px }
+
 #Footer .widgets_wrapper .widget { padding:0!important }
 #Footer p a { font-size:13px!important; }
 #Footer p a:hover { text-decoration: none; }
@@ -28,6 +41,45 @@ li { vertical-align: middle !important; }
 /*Members search*/
 .select-members { border: none !important; border-bottom: 1px solid #83836C !important; box-shadow: none !important; font-size:18px !important; padding: 0 0 10px 0 }
 .members-filters { padding-bottom: 50px }
+#row-tabs-for-styles { display: none !important }
+
+/*HEADER MIEMBROS*/
+#header-miembros {margin-top:150px!important; padding-top:150px!important;padding-bottom:150px!important}
+#inner-title-miembros {margin-bottom:75px!important}
+#inner-subtitle-miembros {margin-bottom:35px!important}
+/*SER MIEMBRO RTRS*/
+#row-ser-miembro {padding-top:150px!important;padding-bottom:115px!important; line-height:30px }
+#inner-title-ser-miembro {margin-bottom:75px!important}
+#destacado-ser-miembro {line-height:36px !important; padding-bottom:20px;}
+#inner-heading-ser-miembro { padding-bottom: 40px !important}
+#row-button-ser-miembro { padding:130px 0 130px 0}
+/*TIPOS DE MEMBRESIAS*/
+#row-tipos-de-membresias {padding-top:150px!important;padding-bottom:115px!important}
+#inner-tipos-miembros { padding-top: 50px; }
+/*CUOTAS DE MEMBRESIA*/
+#row-cuotas-membresia { padding-top: 50px!important; padding-bottom:100px!important;}
+#inner-title-cuotas-membresia { padding-bottom: 50px }
+#bajada-cuotas-membresia { padding-bottom: 50px }
+/*PROCESO DE ADMISION*/
+#row-proceso-admision { padding-bottom:50px!important;}
+#inner-title-proceso-admision { padding-bottom: 50px }
+/*TOMA DE DECISIONES*/
+#row-toma-decisiones {padding-bottom:50px!important;} 
+#inner-title-toma-decisiones { padding-bottom: 50px }
+/*FACULTADES DE LA ASAMBLEA*/
+#row-facultades-asamblea {padding-bottom:100px!important;} 
+#inner-title-facultades-asamblea { padding-bottom: 50px }
+.lf-left { margin-right: 20px !important }
+.lf-right { margin-left: 20px !important }
+/*ASAMBLEA GENERAL*/
+#row-asamblea-general { padding-top:60px; padding-bottom:60px}
+#inner-asamblea { padding-top:50px; padding-bottom:50px}
+/*REPORTES*/
+#row-reportes { padding-top:150px; padding-bottom:150px}
+#inner-title-reportes { padding-bottom: 50px }
+/*NUESTROS MIEMBROS*/
+#row-nuestros-miembros { padding-top: 80px; padding-bottom: 80px }
+
 /*BLOQUES HOME*/
 .fondo-verde-bloque-home { background: #578721; }
 .fondo-bloque-home-uno { background: url(/wp-content/uploads/2019/02/tractor-miembros.jpg) no-repeat center; background-size: cover }
@@ -193,7 +245,6 @@ h2 { line-height: 42px !important }
 	#search-3 { margin-top:35px }
 	#row-bloques-hover-home { margin-top: 120px }
 	#row-certificaciones-home { margin-top: 145px; margin-bottom: 90px }
-	.wpb_wrapper > div { margin-bottom: 0 !important }
 	.caption-icon-certificaciones { margin-top:20px }
 	#header-novedades-home { margin-top:110px; margin-bottom: 60px }
 	#header-agenda-home { margin-top:110px; margin-bottom: 60px }
@@ -235,42 +286,6 @@ h2 { line-height: 42px !important }
 	/*STICKY MENU*/
 	#Top_bar.is-sticky #logo img.logo-sticky { max-height: 133px !important; margin-top: -5px; }
 	#Top_bar.is-sticky { height:127px !important; }
-	/*HEADER MIEMBROS*/
-	#header-miembros {margin-top:150px!important; padding-top:150px!important;padding-bottom:150px!important}
-	#inner-title-miembros {margin-bottom:75px!important}
-	#inner-subtitle-miembros {margin-bottom:35px!important}
-	/*SER MIEMBRO RTRS*/
-	#row-ser-miembro {padding-top:150px!important;padding-bottom:115px!important; line-height:30px }
-	#inner-title-ser-miembro {margin-bottom:75px!important}
-	#destacado-ser-miembro {line-height:36px !important; padding-bottom:20px;}
-	#inner-heading-ser-miembro { padding-bottom: 40px !important}
-	#row-button-ser-miembro { padding:130px 0 130px 0}
-	/*TIPOS DE MEMBRESIAS*/
-	#row-tipos-de-membresias {padding-top:150px!important;padding-bottom:115px!important}
-	#inner-tipos-miembros { padding-top: 50px; }
-	/*CUOTAS DE MEMBRESIA*/
-	#row-cuotas-membresia { padding-top: 50px!important; padding-bottom:100px!important;}
-	#inner-title-cuotas-membresia { padding-bottom: 50px }
-	#bajada-cuotas-membresia { padding-bottom: 50px }
-	/*PROCESO DE ADMISION*/
-	#row-proceso-admision { padding-bottom:50px!important;}
-	#inner-title-proceso-admision { padding-bottom: 50px }
-	/*TOMA DE DECISIONES*/
-	#row-toma-decisiones {padding-bottom:50px!important;} 
-	#inner-title-toma-decisiones { padding-bottom: 50px }
-	/*FACULTADES DE LA ASAMBLEA*/
-	#row-facultades-asamblea {padding-bottom:100px!important;} 
-	#inner-title-facultades-asamblea { padding-bottom: 50px }
-	.lf-left { margin-right: 20px !important }
-	.lf-right { margin-left: 20px !important }
-	/*ASAMBLEA GENERAL*/
-	#row-asamblea-general { padding-top:60px; padding-bottom:60px}
-	#inner-asamblea { padding-top:50px; padding-bottom:50px}
-	/*REPORTES*/
-	#row-reportes { padding-top:150px; padding-bottom:150px}
-	#inner-title-reportes { padding-bottom: 50px }
-	/*NUESTROS MIEMBROS*/
-	#row-nuestros-miembros { padding-top: 80px; padding-bottom: 80px }
 }
  
 @media (min-width: 768px) and (max-width: 991px){
