@@ -56,7 +56,8 @@
 function printMegaMenu(){
 global $wp;
 $menu_id="menu_home";
-if(strpos(home_url($wp->request), "miembros")){
+if(strpos(home_url($wp->request), "miembros") ||
+   strpos(home_url($wp->request), "productores")){
 	$menu_id="menu_not_home";
 }
 return '
@@ -110,19 +111,19 @@ return '
 		</ul>
       </li>
       <li>
-      	<a href="#">Productores</a>
+      	<a href="productores">Productores</a>
       </li>
       <li>
-      	<a href="#">Cómo comprar</a>
+      	<a href="/como-comprar">Cómo comprar</a>
       </li>
       <li>
-      	<a href="#">Certificación</a>
+      	<a href="/certificacion">Certificación</a>
       </li>
       <li>
-      	<a href="#">Conferencia</a>
+      	<a href="/conferencias">Conferencia</a>
       </li>
       <li>
-      	<a href="#">Contacto</a>
+      	<a href="/contacto">Contacto</a>
       </li>
     </ul>
   </div>
@@ -207,7 +208,8 @@ $tags=get_tags(array('hide_empty'=>false));
 								$rs_tm_right="rs-top-menu-right";
 								$rs_lang_menu="rs-lang-menu";
 								$rs_search="rs-search";
-								if(strpos(home_url($wp->request), "miembros")){
+								if(strpos(home_url($wp->request), "miembros") ||
+								   strpos(home_url($wp->request), "productores")){
 									$rs_tm_left="rs-top-alt-left";
 									$rs_tm_right="rs-top-alt-right";
 									$rs_lang_menu="rs-lang-menu-alt";

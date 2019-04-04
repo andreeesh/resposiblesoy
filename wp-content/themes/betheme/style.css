@@ -43,9 +43,19 @@ li { vertical-align: middle !important; }
 .members-filters { padding-bottom: 50px }
 #row-tabs-for-styles { display: none !important }
 
-/*HEADER MIEMBROS*/
-#header-miembros {margin-top:150px!important; padding-top:150px!important;padding-bottom:150px!important}
+/*HEADER SECCION*/
+.header-seccion {margin-top:150px!important; padding-top:150px!important;padding-bottom:150px!important}
+
 #inner-title-miembros {margin-bottom:75px!important}
+#inner-title-productores {margin-bottom:55px!important}
+#inner-bajada-productores {margin-bottom:50px!important}
+#row-productores-certificados {padding-top:45px}
+#row-porque-certificarse {padding-top:45px;}
+#inner-title-porque-certificarse {padding-bottom:75px;}
+#row-dos-porque-certificarse {padding-top:55px}
+#row-separator-porque-certificarse {padding-top:75px;padding-bottom:75px}
+#row-estandar-produccion {padding-top:90px; padding-bottom:90px; margin-top:150px}
+
 #inner-subtitle-miembros {margin-bottom:35px!important}
 /*SER MIEMBRO RTRS*/
 #row-ser-miembro {padding-top:150px!important;padding-bottom:115px!important; line-height:30px }
