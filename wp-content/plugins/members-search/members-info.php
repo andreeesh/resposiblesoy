@@ -35,7 +35,7 @@ if($members->have_posts()):?>
                     $members->the_post();
                     $member=get_post();
                     $member_logo=get_post_custom_values('wpcf-logo', $member->ID);?>
-                    <div class="vc_col-lg-3 vc_col-md-3 vc_col-sm-3 vc_col-xs-3 link-member-tab" data-vc-tab="">
+                    <div class="vc_col-lg-3 vc_col-md-3 vc_col-sm-3 vc_col-xs-3 link-member-tab" data-vc-tab="" id="tab-member-<?=$member->post_name?>">
                         <a href="#panel-member-<?=$member->post_name?>" data-vc-tabs="" data-vc-container=".vc_tta">
                             <img src="<?=$member_logo[0]?>">
                         </a>
@@ -70,6 +70,9 @@ if($members->have_posts()):?>
                             <div class="vc_tta-panel-body members-info-body">
                                 <div class="wpb_text_column wpb_content_element ">
                                     <div class="wpb_wrapper">
+                                        <div class="close-member-info" onclick="closeMemberPanel('#tab-member-<?=$member->post_name?>','#panel-member-<?=$member->post_name?>')">
+                                            <img src="/wp-content/uploads/2019/04/cross-close.png">
+                                        </div>
                                         <div class="item-members-info">Sitio web: <?=$member_website[0]?></div>
                                         <div class="item-members-info">País: <?=$country_name?></div>
                                         <div class="item-members-info">Estamento: <?=$state_name?></div>
