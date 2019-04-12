@@ -33,7 +33,7 @@ function miembros_shortcode($atts)
     $reports = range(2014, 2019, 1);
     
     echo '
-    <div class="row members-filters">
+    <div class="row members-filters pb-xxs">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">';
             if($members->have_posts()):?>
                 <select name="members" id="members" class="select-members">

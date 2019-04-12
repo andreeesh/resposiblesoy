@@ -67,16 +67,16 @@ if($members->have_posts()):?>
                                     <a href="#panel-member-<?=$member->post_name?>" data-vc-accordion="" data-vc-container=".vc_tta-container"></a>
                                 </h4>
                             </div>
-                            <div class="vc_tta-panel-body members-info-body">
+                            <div class="vc_tta-panel-body members-info-body py-xxs px-xxs">
                                 <div class="wpb_text_column wpb_content_element ">
                                     <div class="wpb_wrapper">
                                         <div class="close-member-info" onclick="closeMemberPanel('#tab-member-<?=$member->post_name?>','#panel-member-<?=$member->post_name?>')">
                                             <img src="/wp-content/uploads/2019/04/cross-close.png">
                                         </div>
-                                        <div class="item-members-info">Sitio web: <?=$member_website[0]?></div>
-                                        <div class="item-members-info">País: <?=$country_name?></div>
-                                        <div class="item-members-info">Estamento: <?=$state_name?></div>
-                                        <div class="item-members-info members-about"><?=$member_about[0]?></div>
+                                        <div class="item-members-info pb-xxs">Sitio web: <?=$member_website[0]?></div>
+                                        <div class="item-members-info pb-xxs">País: <?=$country_name?></div>
+                                        <div class="item-members-info pb-xxs">Estamento: <?=$state_name?></div>
+                                        <div class="item-members-info pb-xxs members-about"><?=$member_about[0]?></div>
                                         <?php
                                         if($reports->have_posts()):
                                             while($reports->have_posts()):
@@ -84,7 +84,7 @@ if($members->have_posts()):?>
                                                 $report=get_post();
                                                 $report_title=get_post_custom_values('wpcf-titulo-reporte', $report->ID);
                                                 $report_file=get_post_custom_values('wpcf-archivo', $report->ID);?>
-                                                <div class="item-members-info">Archivos: 
+                                                <div class="item-members-info pb-xxs">Archivos: 
                                                     <a target="_blank" href="<?=$report_file[0]?>"><?=$report_title[0]?></a>
                                                 </div>
                                             <?php
