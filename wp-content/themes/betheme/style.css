@@ -2,6 +2,8 @@
 .wpb_wrapper > div { margin-bottom: 0 !important }
 
 /*Spacing*/
+h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
+
 .py-lg { padding-top: 14% !important; padding-bottom: 14% !important }
 .py-md { padding-top: 12% !important; padding-bottom: 12% !important }
 .py-sm { padding-top: 8% !important; padding-bottom: 8% !important }
@@ -42,7 +44,7 @@
 #Footer .widgets_wrapper .widget { padding:0!important }
 #Footer p a { font-size:13px!important; }
 #Footer p a:hover { text-decoration: none; }
-#Footer h1 { margin-bottom:0px; }
+#Footer h6 { padding-bottom:10px; font-weight:600}
 #Footer { padding-top: 70px; }
 .footer-field { font-weight:500!important; color:#83836c!important; border:1px solid #bcbc9c !important; font-size:13px!important; padding: 6px 10px !important; margin-top:24px!important; }
 .search-field { background: url('/wp-content/uploads/2019/01/lupa-footer.png') !important; background-repeat: no-repeat!important; background-position: right 10px center !important }
@@ -107,32 +109,6 @@ li { vertical-align: middle !important; }
 .lista-facultades { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/03/list-image.png") !important; margin: 0 0 0 0 !important }
 .lista-reportes li { border-bottom: 1px solid #fff; padding: 7px 0 13px 0; }
 .lista-reportes { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/03/list-image-white.png") !important; margin: 0 0 0 0 !important }
-/*#inner-button-ser-miembro { margin-top:45px !important }
-#inner-title-miembros {margin-bottom:75px!important}
-#inner-subtitle-miembros {margin-bottom:35px!important}
-#row-ser-miembro {padding-top:150px!important;padding-bottom:115px!important; line-height:30px }
-#inner-title-ser-miembro {margin-bottom:75px!important}
-#destacado-ser-miembro {line-height:36px !important; padding-bottom:20px;}
-#inner-heading-ser-miembro { padding-bottom: 40px !important}
-#row-button-ser-miembro { padding:130px 0 130px 0}
-#row-tipos-de-membresias {padding-top:150px!important;padding-bottom:115px!important}
-#inner-tipos-miembros { padding-top: 50px; }
-#row-cuotas-membresia { padding-top: 50px!important; padding-bottom:100px!important;}
-#inner-title-cuotas-membresia { padding-bottom: 50px }
-#bajada-cuotas-membresia { padding-bottom: 50px }
-#row-proceso-admision { padding-bottom:50px!important;}
-#inner-title-proceso-admision { padding-bottom: 50px }
-#row-toma-decisiones {padding-bottom:50px!important;} 
-#inner-title-toma-decisiones { padding-bottom: 50px }
-#row-facultades-asamblea {padding-bottom:100px!important;} 
-#inner-title-facultades-asamblea { padding-bottom: 50px }
-.lf-left { margin-right: 20px !important }
-.lf-right { margin-left: 20px !important }
-#row-asamblea-general { padding-top:60px; padding-bottom:60px}
-#inner-asamblea { padding-top:50px; padding-bottom:50px}
-#row-reportes { padding-top:150px; padding-bottom:150px}
-#inner-title-reportes { padding-bottom: 50px }
-#row-nuestros-miembros { padding-top: 80px; padding-bottom: 80px }*/
 
 /*BLOQUES HOME*/
 .fondo-verde-bloque-home { background: #578721; }
@@ -141,7 +117,7 @@ li { vertical-align: middle !important; }
 .fondo-bloque-home-tres { background: url(/wp-content/uploads/2019/02/RTRS_productores.jpg) no-repeat center; background-size: cover }
 .bloques-home { cursor: pointer; display: table; width:100%; height: 326px; text-align: center }
 .caption-bloques-home { display: table-cell; vertical-align: middle; text-align: center; font-weight: 700; 
-font-size: 34px; color:#fff;}
+ color:#fff;}
 .hover-bloques-home { display: table-cell; vertical-align: middle; background: #578721; position: absolute; cursor: pointer; height: 100%; width: 100%; top: 0; left: 0;}
 .texto-bloques-home { padding:20px; display: table-cell; text-align: center; vertical-align: middle; color:#fff; font-size: 20px; font-weight: 500; line-height: 25px;}
 
@@ -177,7 +153,7 @@ font-size: 34px; color:#fff;}
 .text-underline {text-decoration:underline!important}
 
 /*BUTTONS*/
-.button-info-home { border: 1px solid #fff; padding: 8px 40px; color:#fff; font-size:17px }
+.button-info-home { border: 1px solid #fff; color:#fff; }
 .button-info-home:hover { color:#454537; text-decoration:none; background-color: #fff }
 
 /*SLIDE MENU*/
@@ -296,9 +272,7 @@ font-size: 34px; color:#fff;}
 	#rs-top-menu a, #rs-top-menu-alt a { font-size:13px; }
 	#text-2 { margin-top:35px }
 	#search-3 { margin-top:35px }
-	#row-bloques-hover-home { margin-top: 120px }
 	#row-certificaciones-home { margin-top: 145px; margin-bottom: 90px }
-	.caption-icon-certificaciones { margin-top:20px }
 	#header-novedades-home { margin-top:110px; margin-bottom: 60px }
 	#header-agenda-home { margin-top:110px; margin-bottom: 60px }
 	#header-info-mercado { margin-top:110px; margin-bottom: 60px }
@@ -356,6 +330,13 @@ font-size: 34px; color:#fff;}
 	#rs-explore-tags { font-size:21px; margin-top:50px; line-height: 30px}
 	.navbar-default .navbar-nav>li>a { font-size:16px; }
 	.mobile-sticky #Top_bar.is-sticky #logo { margin: 0px 50px !important; }
+	/*NOVEDADES Y AGENDA*/
+	.right-col-agenda { padding: 0 60px 20px 20px; margin-top: 25px;}
+	.left { padding: 0 60px 20px 20px; }
+	#agenda-container { height: 480px; overflow: auto; width:100% !important;}
+	#scrolles-agenda { bottom:69px; position: absolute; right: 0 }
+	.agenda-sep { margin-bottom: 15px; }
+	.agenda-img { margin-bottom:10px; width:100%; height:150px; background-size: cover } 
 }
 
 @media (min-width: 480px) and (max-width: 767px){
@@ -374,6 +355,24 @@ font-size: 34px; color:#fff;}
 	.navbar-default .navbar-nav>li>a { font-size:16px; }
 	.dropdown-menu>li>a {font-size: 14px; padding: 6px 15px;}
 	.mobile-sticky #Top_bar.is-sticky #logo { margin: 0px 50px !important; }
+	/*FOOTER*/
+	.row-menu-footer { margin-top:20px; }
+	#Footer { padding-top: 15px !important; }
+	.footer-field { margin-top: 0 !important; }
+	.cont-search-footer .wpb_wrapper > div { margin-bottom: 0 !important; }
+	.row-menu-footer .wpb_wrapper > div { margin-bottom: 10px !important; }
+	.row-menu-footer h1 { margin-bottom: 10px !important; margin-top: 15px; font-size:18px !important;}
+	.menu-footer { margin-top: 20px !important; }
+	#social-footer { margin-top: 0 !important; }
+	.menu-footer a { display: block !important; margin-bottom: 5px;} 
+	/*NOVEDADES Y AGENDA*/
+	.right-col-agenda { padding:20px 0; margin-top: 25px;}
+	.left { padding:20px 0; }
+	#agenda-container { height: 480px; overflow: auto; width:100% !important;}
+	#scrolles-agenda { bottom:69px; position: absolute; right: 0 }
+	.agenda-sep { margin-bottom: 15px; }
+	.agenda-img { margin-bottom:10px; width:100%; height:150px; background-size: cover } 
+	.amarillo { float:right; width:100% ; text-align:center;}
 }
 
 @media (max-width: 479px){
@@ -394,7 +393,6 @@ font-size: 34px; color:#fff;}
 	#rs-input-search { width:100%; font-size:22px;}
 	#rs-input-search::placeholder { font-size:22px;}
 	#rs-explore-tags { font-size:14px; margin-top:10px; line-height: 25px}
-	.amarillo { float:right; width:100% ; text-align:center;}
 	.mobile-sticky #Top_bar.is-sticky #logo { margin: 0px 50px !important; }
 	/*NOVEDADES Y AGENDA*/
 	.right-col-agenda { padding:20px 0; margin-top: 25px;}
@@ -403,21 +401,7 @@ font-size: 34px; color:#fff;}
 	#scrolles-agenda { bottom:69px; position: absolute; right: 0 }
 	.agenda-sep { margin-bottom: 15px; }
 	.agenda-img { margin-bottom:10px; width:100%; height:150px; background-size: cover } 
-	/*CERTIFICACIONES*/
-	.icon-cert { margin-bottom: 0 !important; }
-	#row-iconos-certificaciones .wpb_wrapper > div { margin-bottom: 15px !important; margin-top: 15px; }	
-	/*INFO MERCADO*/
-	#header-info-mercado { margin-bottom:20px; margin-top: 20px; }
-	.heading-info-home { margin-bottom:0 !important; margin-top: 30px !important; line-height: 30px; font-size: 18px !important;}
-	.col-info-home .vc_custom_1548095872096 { margin-bottom: 0 !important }
-	.empty-30 { margin-bottom: 0!important } 
-	.button-info-home { font-size:13px; }
-	h1 { font-size:22px !important; }
-	/*SAVE THE DATE*/
-	#row-save-the-date .wpb_wrapper > div { margin-bottom: 15px !important; }
-	/*RTRS EN NUMEROS*/
-	.valor-numbers { margin-bottom: 1px !important; }
-	#rts-in-numbers .wpb_wrapper > div { margin-bottom: 10px !important }
+	.amarillo { float:right; width:100% ; text-align:center;}
 	/*FOOTER*/
 	.row-menu-footer { margin-top:20px; }
 	#Footer { padding-top: 15px !important; }

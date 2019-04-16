@@ -4044,7 +4044,7 @@ if (! function_exists('sc_news')) {
 		        <div class="row">
 		            <div>
 		                <div class="col-sm-7 left">
-		                    <a href="#" class="link-head-news"><h1 class="celeste header-na">Novedades</h1></a>';
+		                    <a href="#" class="link-head-news"><h1 class="celeste header-na pb-sm">Novedades</h1></a>';
 		                    if ($news_query->have_posts()) {
 		                    	while ($news_query->have_posts()){
 		                    		$news_query->the_post();
@@ -4058,16 +4058,16 @@ if (! function_exists('sc_news')) {
 
 									$output.='<div class="col-sm-6">';
 									$output.='<div class="news-date">'.get_the_date('', $news->ID).'</div>';	
-									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h2 class="news-title">'.get_the_title($news->ID).'</h2></a>';
+									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title">'.get_the_title($news->ID).'</h5></a>';
 									$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
 									$output.='</div>';
 									$output.='</div>';
 								}
-								$output.='<a href="#" class="button-info-home amarillo">Ver más</a>';
+								$output.='<a href="#" class="button-info-home amarillo py-xxs px-xs">Ver más</a>';
 		                    }
 		      $output.='</div> <!-- end col-sm-7 -->
 		                <div class="col-sm-5 right">
-		                    <h1 class="blanco header-na">Agenda</h1>
+		                    <h1 class="blanco header-na pb-sm">Agenda</h1>
 		                    <div id="agenda-container">';
 			                    if ($agenda_query->have_posts()) {
 			                    	while ($agenda_query->have_posts()) {
@@ -4100,7 +4100,7 @@ if (! function_exists('sc_news')) {
 		        <div class="row">
 		            <div>
 		                <div class="col-sm-7 col-xs-12 left container">
-		                    <a href="#" class="link-head-news"><h1 class="celeste header-na">Novedades</h1></a>';
+		                    <a href="#" class="link-head-news"><h1 class="celeste header-na py-xs">Novedades</h1></a>';
 		                    if ($news_query->have_posts()) {
 		                    	while ($news_query->have_posts()){
 		                    		$news_query->the_post();
@@ -4116,16 +4116,16 @@ if (! function_exists('sc_news')) {
 									$output.='</div>';
 									$output.='<div class="col-sm-6 col-xs-12">';
 									$output.='<div class="news-date">'.get_the_date('', $news->ID).'</div>';	
-									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h2 class="news-title">'.get_the_title($news->ID).'</h2></a>';
+									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title py-xs">'.get_the_title($news->ID).'</h5></a>';
 									$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
 									$output.='</div>';
 									$output.='</div>';
 								}
-								$output.='<a href="#" class="button-info-home amarillo">Ver más</a>';
+								$output.='<a href="#" class="button-info-home amarillo py-xxs px-xs">Ver más</a>';
 		                    }
 		      $output.='</div> 
 		                <div class="col-sm-5 col-xs-12 right right-col-agenda container">
-		                    <h1 class="blanco header-na">Agenda</h1>
+		                    <h1 class="blanco header-na pt-xs pb-sm">Agenda</h1>
 		                    <div id="agenda-container">';
 			                    if ($agenda_query->have_posts()) {
 			                    	while ($agenda_query->have_posts()) {
@@ -4191,29 +4191,29 @@ if (! function_exists('sc_numbers')) {
 
 		$output.='<div class="vc_column-inner">
 			<div class="wpb_wrapper">
-				<h1 class="vc_custom_heading" id="title-numbers">'.$title.'</h1>
+				<h1 class="vc_custom_heading pb-sm" id="title-numbers">'.$title.'</h1>
 				<div class="vc_row wpb_row vc_inner vc_row-fluid">
 					<div class="wpb_column vc_column_container vc_col-sm-4">
 						<div class="vc_column-inner">
 							<div class="wpb_wrapper">
-								<h1 class="vc_custom_heading valor-numbers">'.$valor_uno[0].'</h1>
-								<h4 class="vc_custom_heading bajada-numbers">'.$bajada_uno[0].'</h4>
+								<h1 class="vc_custom_heading valor-numbers pb-xxs">'.$valor_uno[0].'</h1>
+								<h4 class="vc_custom_heading bajada-numbers pb-xxs">'.$bajada_uno[0].'</h4>
 							</div>
 						</div>
 					</div>
 					<div class="wpb_column vc_column_container vc_col-sm-4">
 						<div class="vc_column-inner">
 							<div class="wpb_wrapper">
-								<h1 class="vc_custom_heading valor-numbers">'.$valor_dos[0].'</h1>
-								<h4 class="vc_custom_heading bajada-numbers">'.$bajada_dos[0].'</h4>
+								<h1 class="vc_custom_heading valor-numbers pb-xxs">'.$valor_dos[0].'</h1>
+								<h4 class="vc_custom_heading bajada-numbers pb-xxs">'.$bajada_dos[0].'</h4>
 							</div>
 						</div>
 					</div>
 					<div class="wpb_column vc_column_container vc_col-sm-4">
 						<div class="vc_column-inner">
 							<div class="wpb_wrapper">
-								<h1 class="vc_custom_heading valor-numbers">'.$valor_tres[0].'</h1>
-								<h4 class="vc_custom_heading bajada-numbers">'.$bajada_tres[0].'</h4>
+								<h1 class="vc_custom_heading valor-numbers pb-xxs">'.$valor_tres[0].'</h1>
+								<h4 class="vc_custom_heading bajada-numbers pb-xxs">'.$bajada_tres[0].'</h4>
 							</div>
 						</div>
 					</div>
