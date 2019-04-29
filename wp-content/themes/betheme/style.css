@@ -9,36 +9,42 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .py-sm { padding-top: 8% !important; padding-bottom: 8% !important }
 .py-xs { padding-top: 5% !important; padding-bottom: 5% !important }
 .py-xxs { padding-top: 2% !important; padding-bottom: 2% !important }
+.py-na { padding-top: 1% !important; padding-bottom: 1% !important }
 
 .px-lg { padding-left: 14% !important; padding-right: 14% !important }
 .px-md { padding-left: 12% !important; padding-right: 12% !important }
 .px-sm { padding-left: 8% !important; padding-right: 8% !important }
 .px-xs { padding-left: 5% !important; padding-right: 5% !important }
 .px-xxs { padding-left: 2% !important; padding-right: 2% !important }
+.px-na { padding-left: 1% !important; padding-right: 1% !important }
 
 .pt-lg { padding-top: 14% !important; }
 .pt-md { padding-top: 12% !important; }
 .pt-sm { padding-top: 8% !important; }
 .pt-xs { padding-top: 5% !important; }
 .pt-xxs { padding-top: 2% !important; }
+.pt-na { padding-top: 1% !important; }
 
 .pl-lg { padding-left: 14% !important; }
 .pl-md { padding-left: 12% !important; }
 .pl-sm { padding-left: 8% !important; }
 .pl-xs { padding-left: 5% !important; }
 .pl-xxs { padding-left: 2% !important; }
+.pl-na { padding-left: 1% !important; }
 
 .pb-lg { padding-bottom: 14% !important }
 .pb-md { padding-bottom: 12% !important }
 .pb-sm { padding-bottom: 8% !important }
 .pb-xs { padding-bottom: 5% !important }
 .pb-xxs { padding-bottom: 2% !important }
+.pb-na { padding-bottom: 1% !important }
 
 .pr-lg { padding-right: 14% !important }
 .pr-md { padding-right: 12% !important }
 .pr-sm { padding-right: 8% !important }
 .pr-xs { padding-right: 5% !important }
 .pr-xxs { padding-right: 2% !important }
+.pr-na { padding-right: 1% !important }
 
 /*Footer*/
 #Footer .widgets_wrapper .widget { padding:0!important }
@@ -56,6 +62,10 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .hidden { display: none !important }
 li { vertical-align: middle !important; }
 .row-menu-footer { margin-top:40px; }
+
+/*Flags*/
+.flag {float:left}
+.link-country{float:left;padding-left:10px;padding-top:6px}
 
 /*Icons download*/
 .link-icon-download { background-image:url('/wp-content/uploads/2019/03/download-arrow.png'); background-repeat: no-repeat; background-position: center left; padding-left: 40px; margin-top:20px!important;min-height:28px}
@@ -77,30 +87,15 @@ li { vertical-align: middle !important; }
 .link-member-tab { padding-top: 15px; padding-bottom:10px }
 .vc_tta-container { margin-bottom: 0 !important}
 
+/*PRODUCTORES*/
+#ul-diagnostico { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-diagnostico.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
+#ul-implementacion { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-implementacion.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
+#ul-pre-auditoria { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-pre-auditoria.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
+#ul-auditoria { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-auditoria.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
 
 /*HEADER SECCION*/
 .header-seccion { margin-top:14%!important;}
 /*.seccion-pagina { padding-top:14%!important; padding-bottom:14%!important }*/
-
-/*SECCION PRODUCTORES*/
-/*#inner-title-productores {margin-bottom:55px!important}
-#inner-bajada-productores {margin-bottom:50px!important}
-#row-productores-certificados {padding-top:45px}
-#row-porque-certificarse {padding-top:45px;}
-#inner-title-porque-certificarse {padding-bottom:75px;}
-#row-dos-porque-certificarse {padding-top:55px}
-#row-separator-porque-certificarse {padding-top:75px;padding-bottom:75px}
-#row-estandar-produccion {padding-top:90px; padding-bottom:90px; margin-top:150px}
-#inner-title-estandar-produccion {padding-bottom:50px}
-#inner-bajada-estandar-produccion {padding-bottom:50px}
-#row-interpretaciones-nacionales {padding:50px 0 50px 0}
-#inner-title-interpretaciones-nacionales {padding-bottom:35px}
-.flag {float:left}
-.link-country{float:left;padding-left:30px;padding-top:8px}
-#row-como-se-desarrollan{padding-top:130px}
-.inner-puntos-de-desarrollo {margin-top:90px}
-.num-punto-de-desarrollo{float:left}
-.txt-punto-de-desarrollo{float:left;padding-left:90px;margin-top:-35px}*/
 
 /*SECCION MIEMBROS*/
 #tabla-cuotas td, #tabla-cuotas th { text-align: left; background-color: #fff; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #707070; box-shadow: none; }
@@ -267,6 +262,12 @@ li { vertical-align: middle !important; }
 	.dropdown-menu>li>a {font-size: 14px; padding: 6px 15px;}
 }
 
+@media (min-width:1200px) and (max-width: 1239px){
+	/*Flags*/
+	.flag {float:none}
+	.link-country{float:none;padding-left:0px;padding-top:10px}
+}
+
 @media (min-width:992px){
 	/*GENERAL*/
 	#rs-top-menu a, #rs-top-menu-alt a { font-size:13px; }
@@ -376,6 +377,9 @@ li { vertical-align: middle !important; }
 }
 
 @media (max-width: 479px){
+	/*Flags*/
+	.flag {float:none}
+	.link-country{float:none;padding-left:0px;padding-top:10px}
 	/*HEADER SECCION*/
 	.header-seccion { margin-top:0!important; }
 	/*TOP BAR */
