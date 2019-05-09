@@ -527,6 +527,20 @@
 
   $(document).ready(function() {
    
+    /*Linea de tiempo*/
+    $(".line-history").on('mouseenter', function(){
+      var span = $(this).children()[1];
+      if($(span).hasClass('hidden')){
+        $(span).removeClass('hidden');
+      }
+    });
+    $(".line-history").on('mouseleave', function(){
+      var span = $(this).children()[1];
+      if(!$(span).hasClass('hidden')){
+        $(span).addClass('hidden');
+      }
+    });
+
     /**
     * Hover bloques home uno
     */

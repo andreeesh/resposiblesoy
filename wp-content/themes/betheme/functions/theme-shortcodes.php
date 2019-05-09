@@ -4009,6 +4009,62 @@ if (! function_exists('sc_blockquote')) {
 	}
 }
 
+if (!function_exists('sc_line_years')) {
+	function sc_line_years($attr, $content = null){
+		$output = '<ul class="list-unstyled">
+		<li>
+			<a href="#2006" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2006</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2010" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2010</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2011" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2011</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2012" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2012</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2013" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2013</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2015" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2015</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2017" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2017</span>
+			</a>
+		</li>
+		<li>
+			<a href="#2018" class="ps2id line-history">
+				<img src="http://responsiblesoy.loc/wp-content/uploads/2019/05/line-hor-history.png">
+				<span class="hidden year-history">2018</span>
+			</a>
+		</li>
+		</ul>';
+		return $output;
+	}
+}
+
 /**
  * News [news-agenda]
  */
@@ -7154,6 +7210,7 @@ add_shortcode('video_embed', 'sc_video'); // WordPress has default [video] short
 /*CUSTOM*/
 add_shortcode('numbers', 'sc_numbers');
 add_shortcode('news', 'sc_news');
+add_shortcode('line_years', 'sc_line_years');
 
 add_shortcode('accordion', 'sc_accordion');
 add_shortcode('accordion_item', 'sc_accordion_item');

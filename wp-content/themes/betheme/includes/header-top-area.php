@@ -57,7 +57,10 @@ function printMegaMenu(){
 global $wp;
 $menu_id="menu_home";
 if(strpos(home_url($wp->request), "miembros") ||
-   strpos(home_url($wp->request), "productores")){
+   strpos(home_url($wp->request), "productores") ||
+   strpos(home_url($wp->request), "sobre-la-rtrs") ||
+   strpos(home_url($wp->request), "nuestra-gestion") ||
+   strpos(home_url($wp->request), "quienes-somos")){
 	$menu_id="menu_not_home";
 }
 return '
@@ -65,25 +68,25 @@ return '
   <div class="menu" id="'.$menu_id.'">
     <ul>
       <li>
-      	<a href="#">Sobre la RTRS</a>
+      	<a href="/sobre-la-rtrs">Sobre la RTRS</a>
         <ul>
         	<li>
 	        	<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Qué es la RTRS</h2></a>
-					<a href="#" class="mm-link">Misión y objetivos</a>
-					<a href="#" class="mm-link">Nuestra historia</a>
+					<a href="#que-es" class="ps2id"><h2 class="h-mm">Qué es la RTRS</h2></a>
+					<a href="#mision" class="mm-link ps2id">Misión y objetivos</a>
+					<a href="#nuestra-historia" class="mm-link ps2id">Nuestra historia</a>
 					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Nuestra gestión</h2></a>
-					<a href="#" class="mm-link">Informes de gestión</a>
-					<a href="#" class="mm-link">Reportes financieros</a>
+					<a href="/nuestra-gestion"><h2 class="h-mm">Nuestra gestión</h2></a>
+					<a href="/nuestra-gestion#informes" class="mm-link ps2id">Informes de gestión</a>
+					<a href="/nuestra-gestion#reportes" class="mm-link ps2id">Reportes financieros</a>
 				</div>
 				<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Quiénes somos</h2></a>
-					<a class="mm-link" href="#">Estructura de Gobierno</a>
-					<a class="mm-link" href="#">Comité Ejecutivo</a>
-					<a class="mm-link" href="#">Secretariado Ejecutivo</a>
+					<a href="/quienes-somos" class="ps2id"><h2 class="h-mm">Quiénes somos</h2></a>
+					<a class="mm-link ps2id" href="#estructura">Estructura de Gobierno</a>
+					<a class="mm-link ps2id" href="#comite">Comité Ejecutivo</a>
+					<a class="mm-link ps2id" href="#secretariado">Secretariado Ejecutivo</a>
 					<div class="mm-sep"></div>
-					<a href="#"><h2 class="h-mm">Task Forces</h2></a>
+					<a href="/task-forces" class="ps2id"><h2 class="h-mm">Task Forces</h2></a>
 				</div>
 				<div class="col-md-4">
 					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
@@ -96,13 +99,13 @@ return '
 		  <ul>
         	<li>
 	        	<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Ser Miembro RTRS</h2></a>
-					<a href="#"><h2 class="h-mm">Quiero ser Miembro</h2></a>
-					<a href="#"><h2 class="h-mm">Nuestros Miembros</h2></a>
+					<a href="#ser-miembro" class="ps2id"><h2 class="h-mm">Ser Miembro RTRS</h2></a>
+					<a href="#quiero-ser-miembro" class="ps2id"><h2 class="h-mm">Quiero ser Miembro</h2></a>
+					<a href="#nuestros-miembros" class="ps2id"><h2 class="h-mm">Nuestros Miembros</h2></a>
 				</div>
 				<div class="col-md-4">
-					<a href="#"><h2 class="h-mm">Membresía RTRS</h2></a>
-					<a href="#"><h2 class="h-mm">Reportes Anuales de Progreso</h2></a>
+					<a href="#tipos-de-membresia" class="ps2id"><h2 class="h-mm">Membresía RTRS</h2></a>
+					<a href="#reportes-anuales" class="ps2id"><h2 class="h-mm">Reportes Anuales de Progreso</h2></a>
 				</div>
 				<div class="col-md-4">
 					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
@@ -209,7 +212,10 @@ $tags=get_tags(array('hide_empty'=>false));
 								$rs_lang_menu="rs-lang-menu";
 								$rs_search="rs-search";
 								if(strpos(home_url($wp->request), "miembros") ||
-								   strpos(home_url($wp->request), "productores")){
+								   strpos(home_url($wp->request), "productores") ||
+								   strpos(home_url($wp->request), "sobre-la-rtrs") ||
+								   strpos(home_url($wp->request), "nuestra-gestion") ||
+								   strpos(home_url($wp->request), "quienes-somos")) {
 									$rs_tm_left="rs-top-alt-left";
 									$rs_tm_right="rs-top-alt-right";
 									$rs_lang_menu="rs-lang-menu-alt";

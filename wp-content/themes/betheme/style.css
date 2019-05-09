@@ -1,9 +1,15 @@
 #Content { padding-top: 0 !important }
 .wpb_wrapper > div { margin-bottom: 0 !important }
 
+.green { background-color: green }
+.yellow { background-color: yellow }
+.color-green { color: #568720}
+.full-height { height: calc(100vh - 127px)}
+
 /*Spacing*/
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 
+.py-xl { padding-top: 20% !important; padding-bottom: 20% !important }
 .py-lg { padding-top: 14% !important; padding-bottom: 14% !important }
 .py-md { padding-top: 12% !important; padding-bottom: 12% !important }
 .py-sm { padding-top: 8% !important; padding-bottom: 8% !important }
@@ -18,6 +24,7 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .px-xxs { padding-left: 2% !important; padding-right: 2% !important }
 .px-na { padding-left: 1% !important; padding-right: 1% !important }
 
+.pt-xl { padding-top: 20% !important; }
 .pt-lg { padding-top: 14% !important; }
 .pt-md { padding-top: 12% !important; }
 .pt-sm { padding-top: 8% !important; }
@@ -32,6 +39,7 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .pl-xxs { padding-left: 2% !important; }
 .pl-na { padding-left: 1% !important; }
 
+.pb-xl { padding-bottom: 20% !important }
 .pb-lg { padding-bottom: 14% !important }
 .pb-md { padding-bottom: 12% !important }
 .pb-sm { padding-bottom: 8% !important }
@@ -87,6 +95,13 @@ li { vertical-align: middle !important; }
 .link-member-tab { padding-top: 15px; padding-bottom:10px }
 .vc_tta-container { margin-bottom: 0 !important}
 
+/*SOBRE LA RTRS*/
+.caption-img-sobre { position: absolute }
+.list-unstyled { margin: 0 !important }
+.list-unstyled li { list-style: none }
+.year-history { font-size: 17px; font-weight: 500; color:#fbfbb1; margin-left:10px; padding-top:10px}
+.line-history:hover { text-decoration: none }
+
 /*PRODUCTORES*/
 #ul-diagnostico { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-diagnostico.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
 #ul-implementacion { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-implementacion.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
@@ -94,8 +109,10 @@ li { vertical-align: middle !important; }
 #ul-auditoria { list-style: inside !important; list-style-image: url("/wp-content/uploads/2019/04/arrow-auditoria.png") !important; margin: 0 0 0 0 !important;color:#83836C!important }
 
 /*HEADER SECCION*/
-.header-seccion { margin-top:14%!important;}
-/*.seccion-pagina { padding-top:14%!important; padding-bottom:14%!important }*/
+.header-seccion { margin-top:12.2%!important;}
+
+/*SECCION NUESTRA GESTION*/
+.year-report { position: absolute; margin-top:}
 
 /*SECCION MIEMBROS*/
 #tabla-cuotas td, #tabla-cuotas th { text-align: left; background-color: #fff; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #707070; box-shadow: none; }
@@ -144,12 +161,16 @@ li { vertical-align: middle !important; }
 .font-regular { font-weight: 300 !important }
 .extra-bold {font-weight:800!important}
 .text-white { color: #fff !important }
-.text-center { text-align: center !important}
+.text-center { text-align: center !important }
 .text-underline {text-decoration:underline!important}
+.text-right { text-align: right !important }
 
 /*BUTTONS*/
 .button-info-home { border: 1px solid #fff; color:#fff; }
 .button-info-home:hover { color:#454537; text-decoration:none; background-color: #fff }
+
+.button-info-green { border: 1px solid #568720; color:#568720; }
+.button-info-green:hover { color:#fff; text-decoration:none; background-color: #568720 }
 
 /*SLIDE MENU*/
 #Side_slide #menu ul li a { padding: 6px !important; font-size: 13px !important; }
@@ -269,6 +290,8 @@ li { vertical-align: middle !important; }
 }
 
 @media (min-width:992px){
+	/*SOBRE LA RTRS*/
+	.pr-0 .vc_column-inner { padding-right: 0 !important }
 	/*GENERAL*/
 	#rs-top-menu a, #rs-top-menu-alt a { font-size:13px; }
 	#text-2 { margin-top:35px }
@@ -317,6 +340,9 @@ li { vertical-align: middle !important; }
 }
  
 @media (min-width: 768px) and (max-width: 991px){
+	.full-height { height: calc(100vh - 60px)}
+	/*SOBRE RTRS*/
+	.caption-img-sobre { margin-top: -145px; margin-left:60px }
 	#Top_bar .logo-mobile { margin: -10px 0 0 0 !important }
 	#Top_bar a.responsive-menu-toggle { right: 0px !important; }
 	/*ENCUENTRA*/ 
@@ -341,6 +367,9 @@ li { vertical-align: middle !important; }
 }
 
 @media (min-width: 480px) and (max-width: 767px){
+	.full-height { height: calc(100vh - 60px)}
+	/*SOBRE LA RTRS*/
+	.caption-img-sobre { margin-top: -120px; margin-left:30px }
 	#Top_bar .logo-mobile { margin: -10px 0 0 0 !important }
 	#Top_bar { background-color: transparent !important; position: absolute !important }
 	/*ENCUENTRA*/ 
@@ -377,6 +406,9 @@ li { vertical-align: middle !important; }
 }
 
 @media (max-width: 479px){
+	.full-height { height: calc(100vh - 60px)}
+	/*SOBRE LA RTRS*/
+	.caption-img-sobre { margin-top: -85px; margin-left:10px }
 	/*Flags*/
 	.flag {float:none}
 	.link-country{float:none;padding-left:0px;padding-top:10px}
