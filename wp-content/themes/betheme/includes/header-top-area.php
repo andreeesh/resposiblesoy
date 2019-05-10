@@ -56,13 +56,28 @@
 function printMegaMenu(){
 global $wp;
 $menu_id="menu_home";
-if(strpos(home_url($wp->request), "miembros") ||
-   strpos(home_url($wp->request), "productores") ||
-   strpos(home_url($wp->request), "sobre-la-rtrs") ||
-   strpos(home_url($wp->request), "nuestra-gestion") ||
-   strpos(home_url($wp->request), "quienes-somos")){
+
+if(strpos(home_url($wp->request), "miembros")) {
 	$menu_id="menu_not_home";
 }
+
+if (strpos(home_url($wp->request), "productores")){
+	$menu_id="menu_not_home";
+} 
+
+if (strpos(home_url($wp->request), "sobre-la-rtrs")){
+	$menu_id="menu_not_home";
+	$sobre_la_rtrs="";
+} 
+
+if (strpos(home_url($wp->request), "nuestra-gestion")){
+	$menu_id="menu_not_home";
+} 
+
+if (strpos(home_url($wp->request), "quienes-somos")){
+	$menu_id="menu_not_home";
+}
+
 return '
 <div class="menu-container vc_hidden-sm vc_hidden-xs">
   <div class="menu" id="'.$menu_id.'">
@@ -72,9 +87,9 @@ return '
         <ul>
         	<li>
 	        	<div class="col-md-4">
-					<a href="#que-es" class="ps2id"><h2 class="h-mm">Qué es la RTRS</h2></a>
-					<a href="#mision" class="mm-link ps2id">Misión y objetivos</a>
-					<a href="#nuestra-historia" class="mm-link ps2id">Nuestra historia</a>
+					<a href="/sobre-la-rtrs/#que-es" class="ps2id"><h2 class="h-mm">Qué es la RTRS</h2></a>
+					<a href="/sobre-la-rtrs/#mision" class="mm-link ps2id">Misión y objetivos</a>
+					<a href="/sobre-la-rtrs/#nuestra-historia" class="mm-link ps2id">Nuestra historia</a>
 					<div class="mm-sep"></div>
 					<a href="/nuestra-gestion"><h2 class="h-mm">Nuestra gestión</h2></a>
 					<a href="/nuestra-gestion#informes" class="mm-link ps2id">Informes de gestión</a>
@@ -82,9 +97,9 @@ return '
 				</div>
 				<div class="col-md-4">
 					<a href="/quienes-somos" class="ps2id"><h2 class="h-mm">Quiénes somos</h2></a>
-					<a class="mm-link ps2id" href="#estructura">Estructura de Gobierno</a>
-					<a class="mm-link ps2id" href="#comite">Comité Ejecutivo</a>
-					<a class="mm-link ps2id" href="#secretariado">Secretariado Ejecutivo</a>
+					<a class="mm-link ps2id" href="/quienes-somos/#estructura">Estructura de Gobierno</a>
+					<a class="mm-link ps2id" href="/quienes-somos/#comite">Comité Ejecutivo</a>
+					<a class="mm-link ps2id" href="/quienes-somos/#secretariado">Secretariado Ejecutivo</a>
 					<div class="mm-sep"></div>
 					<a href="/task-forces" class="ps2id"><h2 class="h-mm">Task Forces</h2></a>
 				</div>
