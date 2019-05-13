@@ -56,9 +56,13 @@
 function printMegaMenu(){
 global $wp;
 $menu_id="menu_home";
+$link_miembros="/miembros";
+$link_sobre_la_rtrs="/sobre-la-rtrs";
+$link_quienes_somos="/quienes-somos";
 
 if(strpos(home_url($wp->request), "miembros")) {
 	$menu_id="menu_not_home";
+	$link_miembros="";
 }
 
 if (strpos(home_url($wp->request), "productores")){
@@ -67,7 +71,7 @@ if (strpos(home_url($wp->request), "productores")){
 
 if (strpos(home_url($wp->request), "sobre-la-rtrs")){
 	$menu_id="menu_not_home";
-	$sobre_la_rtrs="";
+	$link_sobre_la_rtrs="";
 } 
 
 if (strpos(home_url($wp->request), "nuestra-gestion")){
@@ -76,6 +80,7 @@ if (strpos(home_url($wp->request), "nuestra-gestion")){
 
 if (strpos(home_url($wp->request), "quienes-somos")){
 	$menu_id="menu_not_home";
+	$link_quienes_somos="";
 }
 
 return '
@@ -87,9 +92,9 @@ return '
         <ul>
         	<li>
 	        	<div class="col-md-4">
-					<a href="/sobre-la-rtrs/#que-es" class="ps2id"><h2 class="h-mm">Qué es la RTRS</h2></a>
-					<a href="/sobre-la-rtrs/#mision" class="mm-link ps2id">Misión y objetivos</a>
-					<a href="/sobre-la-rtrs/#nuestra-historia" class="mm-link ps2id">Nuestra historia</a>
+					<a href="'.$link_sobre_la_rtrs.'#que-es" class="ps2id"><h2 class="h-mm">Qué es la RTRS</h2></a>
+					<a href="'.$link_sobre_la_rtrs.'#mision" class="mm-link ps2id">Misión y objetivos</a>
+					<a href="'.$link_sobre_la_rtrs.'#nuestra-historia" class="mm-link ps2id">Nuestra historia</a>
 					<div class="mm-sep"></div>
 					<a href="/nuestra-gestion"><h2 class="h-mm">Nuestra gestión</h2></a>
 					<a href="/nuestra-gestion#informes" class="mm-link ps2id">Informes de gestión</a>
@@ -97,9 +102,9 @@ return '
 				</div>
 				<div class="col-md-4">
 					<a href="/quienes-somos" class="ps2id"><h2 class="h-mm">Quiénes somos</h2></a>
-					<a class="mm-link ps2id" href="/quienes-somos/#estructura">Estructura de Gobierno</a>
-					<a class="mm-link ps2id" href="/quienes-somos/#comite">Comité Ejecutivo</a>
-					<a class="mm-link ps2id" href="/quienes-somos/#secretariado">Secretariado Ejecutivo</a>
+					<a class="mm-link ps2id" href="'.$link_quienes_somos.'#estructura">Estructura de Gobierno</a>
+					<a class="mm-link ps2id" href="'.$link_quienes_somos.'#comite">Comité Ejecutivo</a>
+					<a class="mm-link ps2id" href="'.$link_quienes_somos.'#secretariado">Secretariado Ejecutivo</a>
 					<div class="mm-sep"></div>
 					<a href="/task-forces" class="ps2id"><h2 class="h-mm">Task Forces</h2></a>
 				</div>
@@ -114,13 +119,13 @@ return '
 		  <ul>
         	<li>
 	        	<div class="col-md-4">
-					<a href="#ser-miembro" class="ps2id"><h2 class="h-mm">Ser Miembro RTRS</h2></a>
-					<a href="#quiero-ser-miembro" class="ps2id"><h2 class="h-mm">Quiero ser Miembro</h2></a>
-					<a href="#nuestros-miembros" class="ps2id"><h2 class="h-mm">Nuestros Miembros</h2></a>
+					<a href="'.$link_miembros.'#ser-miembro" class="ps2id"><h2 class="h-mm">Ser Miembro RTRS</h2></a>
+					<a href="'.$link_miembros.'#quiero-ser-miembro" class="ps2id"><h2 class="h-mm">Quiero ser Miembro</h2></a>
+					<a href="'.$link_miembros.'#nuestros-miembros" class="ps2id"><h2 class="h-mm">Nuestros Miembros</h2></a>
 				</div>
 				<div class="col-md-4">
-					<a href="#tipos-de-membresia" class="ps2id"><h2 class="h-mm">Membresía RTRS</h2></a>
-					<a href="#reportes-anuales" class="ps2id"><h2 class="h-mm">Reportes Anuales de Progreso</h2></a>
+					<a href="'.$link_miembros.'#tipos-de-membresia" class="ps2id"><h2 class="h-mm">Membresía RTRS</h2></a>
+					<a href="'.$link_miembros.'#reportes-anuales" class="ps2id"><h2 class="h-mm">Reportes Anuales de Progreso</h2></a>
 				</div>
 				<div class="col-md-4">
 					<img class="img-responsive" src="/wp-content/uploads/2019/01/foto-mega-menu.jpg">
