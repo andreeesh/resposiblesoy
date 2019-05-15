@@ -83,6 +83,18 @@ if (strpos(home_url($wp->request), "quienes-somos")){
 	$link_quienes_somos="";
 }
 
+if (strpos(home_url($wp->request), "task-forces")){
+	$menu_id="menu_not_home";
+}
+
+if (strpos(home_url($wp->request), "biblioteca")){
+	$menu_id="menu_not_home";
+}
+
+if (strpos(home_url($wp->request), "documento")){
+	$menu_id="menu_not_home";
+}
+
 return '
 <div class="menu-container vc_hidden-sm vc_hidden-xs">
   <div class="menu" id="'.$menu_id.'">
@@ -235,7 +247,10 @@ $tags=get_tags(array('hide_empty'=>false));
 								   strpos(home_url($wp->request), "productores") ||
 								   strpos(home_url($wp->request), "sobre-la-rtrs") ||
 								   strpos(home_url($wp->request), "nuestra-gestion") ||
-								   strpos(home_url($wp->request), "quienes-somos")) {
+								   strpos(home_url($wp->request), "quienes-somos") ||
+								   strpos(home_url($wp->request), "task-forces") ||
+								   strpos(home_url($wp->request), "biblioteca") ||
+								   strpos(home_url($wp->request), "documento")) {
 									$rs_tm_left="rs-top-alt-left";
 									$rs_tm_right="rs-top-alt-right";
 									$rs_lang_menu="rs-lang-menu-alt";
@@ -244,7 +259,7 @@ $tags=get_tags(array('hide_empty'=>false));
 								echo '
 								<div id="rs-top-menu" class="vc_hidden-sm vc_hidden-xs">
 									<div id="'.$rs_tm_left.'">
-										<a href="#">Biblioteca</a> <span class="sep">|</span>
+										<a href="/biblioteca">Biblioteca</a> <span class="sep">|</span>
 										<a href="#">Acceda a la plataforma</a> <span class="sep">|</span>
 										<a href="#">Información del mercado</a>
 									</div>

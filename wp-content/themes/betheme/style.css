@@ -6,6 +6,22 @@
 .color-green { color: #568720}
 .full-height { height: calc(100vh - 127px)}
 
+/*Biblioteca*/
+#tipo_cerrado { color:#83836c; border-bottom: 1px solid #bdbda5; padding-bottom: 5px; background-image: url('/wp-content/uploads/2019/05/tipos_down.png'); background-repeat: no-repeat; background-position-x: right; background-position-y: 10px; cursor: pointer; }
+#tipo_abierto { margin-bottom: 10px; color:#fff; border-bottom: 1px solid #fff; padding-bottom: 5px; background-image: url('/wp-content/uploads/2019/05/tipos_up.png'); background-repeat: no-repeat; background-position-x: right; background-position-y: 10px; cursor: pointer; }
+#cont_tipo_abierto { background: #56871f; padding: 20px }
+#cont_tipo_cerrado { padding: 20px }
+.link-tipos { color: #fff; display: block; padding: 5px 0 }
+.link-tipos:hover { color: #fff }
+#cont_buscador_biblioteca { padding: 20px }
+#buscador_biblioteca::placeholder{color: #83836c}
+#buscador_biblioteca { color: #83836c; padding: 0; padding-bottom: 5px; border: none; max-width: 100%; border-bottom: 1px solid #bdbda5; font-size: 16px; color: #626262; box-shadow: none; margin: 0; width: 100%; background-image:url('/wp-content/uploads/2019/05/lupa_biblioteca.png'); background-repeat: no-repeat; background-position-x: right; background-position-y: 5px }
+#tabla-documentos { margin-top: 20px }
+#tabla-documentos th, #tabla-documentos td { color: #83836c; font-size: 16px; text-align: left; background-color: #f7f7f4; box-shadow: none; border: 3px solid #fff; padding: 20px; font-size: 14px }
+#tabla-documentos td a { color: #83836c; text-decoration: underline }
+#tabla-documentos td a:hover { color: #83836c; text-decoration: underline }
+.link-volver-biblioteca { background-image:url('/wp-content/uploads/2019/05/arrow-left-biblioteca.png'); background-repeat: no-repeat; background-position-x: left; background-position-y: 5px; padding-left: 30px }
+
 /*Spacing*/
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 

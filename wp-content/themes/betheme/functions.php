@@ -167,6 +167,14 @@ if( ! mfn_opts_get( 'plugin-visual' ) ){
 	}
 }
 
+function js_composer_front_load() {
+    if(is_single()) {
+        wp_enqueue_style('js_composer_front');
+    }
+}
+
+add_action('wp_enqueue_scripts', 'js_composer_front_load');
+
 // Dashboard ------------------------------------------------------------------
 if( is_admin() ){
 

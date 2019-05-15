@@ -516,10 +516,12 @@ class Vc_Base {
 		$front_css_file = vc_asset_url( 'css/js_composer.min.css' );
 		$upload_dir = wp_upload_dir();
 		$vc_upload_dir = vc_upload_dir();
+		
 		if ( '1' === vc_settings()->get( 'use_custom' ) && is_file( $upload_dir['basedir'] . '/' . $vc_upload_dir . '/js_composer_front_custom.css' ) ) {
 			$front_css_file = $upload_dir['baseurl'] . '/' . $vc_upload_dir . '/js_composer_front_custom.css';
 			$front_css_file = vc_str_remove_protocol( $front_css_file );
 		}
+		
 		wp_register_style( 'js_composer_front', $front_css_file, array(), WPB_VC_VERSION );
 
 		$custom_css_path = $upload_dir['basedir'] . '/' . $vc_upload_dir . '/custom.css';
