@@ -21,6 +21,14 @@
 #tabla-documentos td a { color: #83836c; text-decoration: underline }
 #tabla-documentos td a:hover { color: #83836c; text-decoration: underline }
 .link-volver-biblioteca { background-image:url('/wp-content/uploads/2019/05/arrow-left-biblioteca.png'); background-repeat: no-repeat; background-position-x: left; background-position-y: 5px; padding-left: 30px }
+#table-doc-ampliado { font-size: 16px; line-height: 24px; }
+#table-doc-ampliado td { text-align: left; color: #454537; border: none; box-shadow: none; border-bottom: 1px solid #454537 }
+#table-doc-ampliado tr:nth-child(2n) td { background:transparent!important}
+#table-doc-ampliado tr td:first-child {width: 40%; vertical-align: top}
+#table-doc-ampliado .tr-desc td { padding: 30px 10px }
+.down-documento { color: #56871f }
+.icon-down-documento { margin-right: 15px }
+.link-down-doc:hover { text-decoration: none }
 
 /*Spacing*/
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
