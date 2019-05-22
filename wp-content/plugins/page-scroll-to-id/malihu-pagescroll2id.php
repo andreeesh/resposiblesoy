@@ -3,7 +3,7 @@
 Plugin Name: Page scroll to id
 Plugin URI: http://manos.malihu.gr/page-scroll-to-id
 Description: Page scroll to id is an easy-to-use jQuery plugin that enables animated (smooth) page scrolling to specific id within the document. 
-Version: 1.6.4
+Version: 1.6.5
 Author: malihu
 Author URI: http://manos.malihu.gr
 License: MIT License (MIT)
@@ -47,7 +47,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 	
 	class malihuPageScroll2id{ // --edit--
 		
-		protected $version='1.6.4'; // Plugin version --edit--
+		protected $version='1.6.5'; // Plugin version --edit--
 		protected $update_option=null;
 		
 		protected $plugin_name='Page scroll to id'; // Plugin name --edit--
@@ -92,6 +92,11 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			// Load admin stylesheet and javaScript.
 			add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
 			add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+			// Load admin block editor (i.e. Gutenberg) assets (stylesheet, javaScript etc.)
+			add_action('enqueue_block_editor_assets', array($this, 'enqueue_admin_block_styles'));
+			add_action('enqueue_block_editor_assets', array($this, 'enqueue_admin_block_scripts'));
+			// Register plugin's blocks (Gutenberg)
+			add_action('plugins_loaded', array($this, 'plugin_register_blocks_fn'));
 			// load public stylesheet and javaScript.
 			if(!defined('PS2ID_MINIFIED_JS')){
 				define('PS2ID_MINIFIED_JS', true); //load production script by default
@@ -159,6 +164,37 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					'sc_prefix' => $this->sc_pfx
 				);
 				wp_localize_script($this->plugin_slug.'-admin-script', '_adminParams', $params);
+			}
+		}
+
+		// Admin block editor styles (Gutenberg)
+		public function enqueue_admin_block_styles(){
+			wp_enqueue_style(
+				$this->plugin_slug.'-admin-blocks-style', 
+				plugins_url( 'includes/blocks/blocks.css', __FILE__ ), 
+				array( 'wp-edit-blocks' ), 
+				filemtime( plugin_dir_path( __FILE__ ) . 'includes/blocks/blocks.css' )
+			);
+		}
+
+		// Admin block editor scripts (Gutenberg)
+		public function enqueue_admin_block_scripts(){
+			wp_enqueue_script(
+				$this->plugin_slug.'-admin-blocks-script', 
+				plugins_url( 'includes/blocks/blocks.js', __FILE__ ), 
+				array( 'wp-blocks', 'wp-components', 'wp-element', 'wp-i18n', 'wp-editor' ), 
+				filemtime( plugin_dir_path( __FILE__ ) . 'includes/blocks/blocks.js' ),
+				true // Load script in footer.
+			);
+		}
+
+		// Register plugin's blocks (Gutenberg)
+		public function plugin_register_blocks_fn(){
+			if ( function_exists( 'register_block_type' ) ){
+				register_block_type( 'ps2id/blocks', array(
+					'editor_script' => $this->plugin_slug.'-admin-blocks-script',
+					'editor_style'  => $this->plugin_slug.'-admin-blocks-style',
+				) );
 			}
 		}
 		
@@ -404,7 +440,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			// Get/set plugin version
 			$current_version=get_site_option($this->db_prefix.'version');
 			if(!$current_version){
-				add_option($this->db_prefix.'version', $this->version);
+				add_site_option($this->db_prefix.'version', $this->version);
 				$old_db_options=$this->get_plugin_old_db_options(); // Get old/deprecated plugin db options --edit--
 				$this->delete_plugin_old_db_options(); // Delete old/deprecated plugin db options --edit--
 			}else{
@@ -420,7 +456,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					$update[$this->pl_pfx.'instance_'.$i]=$instance;
 				}
 				$this->update_option=update_option($this->db_prefix.'instances', $update); // Update options
-				update_option($this->db_prefix.'version', $this->version); // Update version
+				update_site_option($this->db_prefix.'version', $this->version); // Update version
 			}
 		}
 		
@@ -434,7 +470,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			$old_db_opt6=get_option('malihu_pagescroll2id_pageEndSmoothScroll');
 			$old_db_opt7=get_option('malihu_pagescroll2id_layout');
 			return array(  
-				($old_db_opt1) ? $old_db_opt1 : 'a[href*=#]:not([href=#])',
+				($old_db_opt1) ? $old_db_opt1 : 'a[href*=\'#\']:not([href=\'#\'])',
 				($old_db_opt2) ? $old_db_opt2 : 800,
 				($old_db_opt3) ? $old_db_opt3 : 'true',
 				($old_db_opt4) ? $old_db_opt4 : 'easeInOutQuint',
@@ -534,6 +570,10 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			if(isset($pl_i['adminDisplayWidgetsId']) && $pl_i['adminDisplayWidgetsId']['value']=='true'){
 				add_action('widget_form_callback', array($this, 'display_widget_id'), 10, 2);
 			}
+			// Auto-generate dummy offset element
+			if(isset($pl_i['dummyOffset']) && $pl_i['dummyOffset']['value']=='true'){
+				add_action('wp_footer', array($this, 'dummy_offset_element'), 99);
+			}
 		}
 		
 		// WP Menu API menus HTML attributes fn 
@@ -552,12 +592,22 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			}
 			return $instance;
 		}
+
+		// Auto-generate dummy offset element fn
+		public function dummy_offset_element(){
+			$dummy_offset_class = '';
+			if ( is_admin_bar_showing() ) {
+				$dummy_offset_class .= ' class="admin-bar-visible"';
+			}
+			echo '<div class="ps2id-dummy-offset-wrapper" style="overflow:hidden;height:0;visibility:hidden;z-index:-1;"><div id="ps2id-dummy-offset"'.$dummy_offset_class.' style="width:100%;visibility:hidden;"></div></div>';
+		}
 		
 		public function plugin_options_array($action, $i, $j, $old){
 			// --edit--
 			// Defaults
-			$d0='a[href*=#]:not([href=#])';
+			$d0='a[href*=\'#\']:not([href=\'#\'])';
 			$d19='true';
+			$d29='a[href^=\'#tab-\'], a[href^=\'#tabs-\'], a[data-toggle]:not([data-toggle=\'tooltip\']), a[data-slide], a[data-vc-tabs], a[data-vc-accordion]';
 			$d1=800;
 			$d2='true';
 			$d3='easeInOutQuint';
@@ -567,6 +617,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 			$d26='false';
 			$d6='vertical';
 			$d7=0;
+			$d30='false';
 			$d8='';
 			$d9='mPS2id-clicked';
 			$d10='mPS2id-target';
@@ -590,6 +641,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 				case 'validate':
 					$v0=$this->sanitize_input('text', $_POST[$this->db_prefix.$i.'_selector'], $d0);
 					$v19=(isset($_POST[$this->db_prefix.$i.'_autoSelectorMenuLinks'])) ? 'true' : 'false';
+					$v29=$this->sanitize_input('text', $_POST[$this->db_prefix.$i.'_excludeSelector'], $d29);
 					$v1=$this->sanitize_input('number', $_POST[$this->db_prefix.$i.'_scrollSpeed'], $d1);
 					$v2=(isset($_POST[$this->db_prefix.$i.'_autoScrollSpeed'])) ? 'true' : 'false';
 					$v3=$_POST[$this->db_prefix.$i.'_scrollEasing'];
@@ -599,6 +651,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					$v26=(isset($_POST[$this->db_prefix.$i.'_autoCorrectScroll'])) ? 'true' : 'false';
 					$v6=$_POST[$this->db_prefix.$i.'_layout'];
 					$v7=$this->sanitize_input('text', $_POST[$this->db_prefix.$i.'_offset'], $d7);
+					$v30=(isset($_POST[$this->db_prefix.$i.'_dummyOffset'])) ? 'true' : 'false';
 					$v8=(empty($_POST[$this->db_prefix.$i.'_highlightSelector'])) ? $d8 : $this->sanitize_input('text', $_POST[$this->db_prefix.$i.'_highlightSelector'], $d8);
 					$v9=$this->sanitize_input('class', $_POST[$this->db_prefix.$i.'_clickedClass'], $d9);
 					$v10=$this->sanitize_input('class', $_POST[$this->db_prefix.$i.'_targetClass'], $d10);
@@ -637,6 +690,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 						$v6=(isset($j['layout'])) ? $j['layout']['value'] : $d6;
 					}
 					$v7=(isset($j['offset'])) ? $j['offset']['value'] : $d7;
+					$v30=(isset($j['dummyOffset'])) ? $j['dummyOffset']['value'] : $d30;
 					$v8=(isset($j['highlightSelector'])) ? $j['highlightSelector']['value'] : $d8;
 					$v9=(isset($j['clickedClass'])) ? $j['clickedClass']['value'] : $d9;
 					$v10=(isset($j['targetClass'])) ? $j['targetClass']['value'] : $d10;
@@ -650,6 +704,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					$v18=(isset($j['scrollToHashDelay'])) ? $j['scrollToHashDelay']['value'] : $d18;
 					$v15=(isset($j['disablePluginBelow'])) ? $j['disablePluginBelow']['value'] : $d15;
 					$v19=(isset($j['autoSelectorMenuLinks'])) ? $j['autoSelectorMenuLinks']['value'] : $d19;
+					$v29=(isset($j['excludeSelector'])) ? $j['excludeSelector']['value'] : $d29;
 					$v20=(isset($j['adminDisplayWidgetsId'])) ? $j['adminDisplayWidgetsId']['value'] : $d20;
 					$v21=(isset($j['adminTinyMCEbuttons'])) ? $j['adminTinyMCEbuttons']['value'] : $d21;
 					$v23=(isset($j['unbindUnrelatedClickEvents'])) ? $j['unbindUnrelatedClickEvents']['value'] : $d23;
@@ -662,6 +717,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 				default:
 					$v0=$d0;
 					$v19=$d19;
+					$v29=$d29;
 					$v1=$d1;
 					$v2=$d2;
 					$v3=$d3;
@@ -671,6 +727,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					$v26=$d26;
 					$v6=$d6;
 					$v7=$d7;
+					$v30=$d30;
 					$v8=$d8;
 					$v9=$d9;
 					$v10=$d10;
@@ -714,7 +771,7 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					'checkbox_label' => null,
 					'radio_labels' => null,
 					'field_info' => null,
-					'description' => 'Set the links (in the form of <a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS selectors</a>) that will scroll the page when clicked (default value: any link with a non-empty hash (<code>#</code>) value in its URL) <br /><small>In addition to selectors above, the plugin is enabled automatically on links (or links contained within elements) with class <code>ps2id</code></small>',
+					'description' => 'Set the links (in the form of <a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS selectors</a>) that will scroll the page when clicked (default value: any link with a non-empty hash (<code>#</code>) value in its URL) <br /><small>In addition to selectors above, the plugin is enabled automatically on links (or links contained within elements) with class <code>ps2id</code></small> <br /><small><a class="button button-small mPS2id-show-option-common-values" href="#">Show common values</a><span>For all links: <code>'.$d0.'</code><br />For menu links only: <code>.menu-item a[href*=\'#\']:not([href=\'#\'])</code></span></small>',
 					'wrapper' => null
 				),
 				'autoSelectorMenuLinks' => array(
@@ -728,6 +785,18 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					'field_info' => null,
 					'description' => 'Automatically enable the plugin on custom links (containing <code>#</code> in their URL) created in Appearance &rarr; Menus <br /><small>Requires WordPress version 3.6 or higher</small>',
 					'wrapper' => 'fieldset'
+				),
+				'excludeSelector' => array(
+					'value' => $v29,
+					'values' => null,
+					'id' => $this->db_prefix.$i.'_excludeSelector',
+					'field_type' => 'text',
+					'label' => '',
+					'checkbox_label' => null,
+					'radio_labels' => null,
+					'field_info' => 'selectors are excluded',
+					'description' => 'Set the links (in the form of <a href="http://www.w3.org/TR/css3-selectors/" target="_blank">CSS selectors</a>) that will be excluded from plugin&apos;s selectors (the plugin will not hanlde these links) <br /><small><a class="button button-small mPS2id-show-option-common-values" href="#">Show common values</a><span><code>'.$d29.'</code></span></small>',
+					'wrapper' => null
 				),
 				'scrollSpeed' => array(
 					'value' => $v1,
@@ -836,6 +905,18 @@ if(!class_exists('malihuPageScroll2id')){ // --edit--
 					'field_info' => 'pixels',
 					'description' => 'Offset scroll-to position by x amount of pixels (positive or negative) or by <a href="http://www.w3.org/TR/css3-selectors/" target="_blank">selector</a> (e.g. <code>#navigation-menu</code>)',
 					'wrapper' => null
+				),
+				'dummyOffset' => array(
+					'value' => $v30,
+					'values' => null,
+					'id' => $this->db_prefix.$i.'_dummyOffset',
+					'field_type' => 'checkbox',
+					'label' => '',
+					'checkbox_label' => 'Auto-generate <code>#ps2id-dummy-offset</code> element',
+					'radio_labels' => null,
+					'field_info' => null,
+					'description' => 'Enable if you want the plugin to create a hidden element and use its selector as offset. The element that will be created is: <code>#ps2id-dummy-offset</code> <br /><small>You should use the <code>#ps2id-dummy-offset</code> value in the <b>Offset</b> option above. You should then use the same selector/value and in your CSS and give it a height equal to the amount of offset you want.</small>',
+					'wrapper' => 'fieldset'
 				),
 				'highlightSelector' => array(
 					'value' => $v8,

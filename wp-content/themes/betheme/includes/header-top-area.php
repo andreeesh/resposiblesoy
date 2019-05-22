@@ -95,6 +95,10 @@ if (strpos(home_url($wp->request), "documento")){
 	$menu_id="menu_not_home";
 }
 
+if (strpos(home_url($wp->request), "novedades")){
+	$menu_id="menu_not_home";
+}
+
 return '
 <div class="menu-container vc_hidden-sm vc_hidden-xs">
   <div class="menu" id="'.$menu_id.'">
@@ -250,7 +254,8 @@ $tags=get_tags(array('hide_empty'=>false));
 								   strpos(home_url($wp->request), "quienes-somos") ||
 								   strpos(home_url($wp->request), "task-forces") ||
 								   strpos(home_url($wp->request), "biblioteca") ||
-								   strpos(home_url($wp->request), "documento")) {
+								   strpos(home_url($wp->request), "documento") ||
+								   strpos(home_url($wp->request), "novedades")) {
 									$rs_tm_left="rs-top-alt-left";
 									$rs_tm_right="rs-top-alt-right";
 									$rs_lang_menu="rs-lang-menu-alt";

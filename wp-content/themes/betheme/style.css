@@ -48,20 +48,20 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .px-xxs { padding-left: 2% !important; padding-right: 2% !important }
 .px-na { padding-left: 1% !important; padding-right: 1% !important }
 
-.pt-xl { padding-top: 20% !important; }
-.pt-lg { padding-top: 14% !important; }
-.pt-md { padding-top: 12% !important; }
-.pt-sm { padding-top: 8% !important; }
-.pt-xs { padding-top: 5% !important; }
-.pt-xxs { padding-top: 2% !important; }
-.pt-na { padding-top: 1% !important; }
+.pt-xl { padding-top: 20% !important; } .mt-xl { margin-top: 20% !important; }
+.pt-lg { padding-top: 14% !important; } .mt-lg { margin-top: 14% !important; }
+.pt-md { padding-top: 12% !important; } .mt-md { margin-top: 12% !important; }
+.pt-sm { padding-top: 8% !important; } .mt-sm { margin-top: 8% !important; }
+.pt-xs { padding-top: 5% !important; } .mt-xs { margin-top: 5% !important; }
+.pt-xxs { padding-top: 2% !important; } .mt-xxs { margin-top: 2% !important; }
+.pt-na { padding-top: 1% !important; } .mt-na { margin-top: 1% !important; }
 
-.pl-lg { padding-left: 14% !important; }
-.pl-md { padding-left: 12% !important; }
-.pl-sm { padding-left: 8% !important; }
-.pl-xs { padding-left: 5% !important; }
-.pl-xxs { padding-left: 2% !important; }
-.pl-na { padding-left: 1% !important; }
+.pl-lg { padding-left: 14% !important; } .ml-lg { margin-left: 14% !important; }
+.pl-md { padding-left: 12% !important; } .ml-md { margin-left: 12% !important; }
+.pl-sm { padding-left: 8% !important; } .ml-sm { margin-left: 8% !important; }
+.pl-xs { padding-left: 5% !important; } .ml-xs { margin-left: 5% !important; }
+.pl-xxs { padding-left: 2% !important; } .ml-xxs { margin-left: 2% !important; }
+.pl-na { padding-left: 1% !important; } .ml-na { margin-left: 1% !important; }
 
 .pb-xl { padding-bottom: 20% !important }
 .pb-lg { padding-bottom: 14% !important }
@@ -71,12 +71,12 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .pb-xxs { padding-bottom: 2% !important }
 .pb-na { padding-bottom: 1% !important }
 
-.pr-lg { padding-right: 14% !important }
-.pr-md { padding-right: 12% !important }
-.pr-sm { padding-right: 8% !important }
-.pr-xs { padding-right: 5% !important }
-.pr-xxs { padding-right: 2% !important }
-.pr-na { padding-right: 1% !important }
+.pr-lg { padding-right: 14% !important } .mr-lg { margin-right: 14% !important }
+.pr-md { padding-right: 12% !important } .mr-md { margin-right: 12% !important }
+.pr-sm { padding-right: 8% !important } .mr-sm { margin-right: 8% !important }
+.pr-xs { padding-right: 5% !important } .mr-xs { margin-right: 5% !important }
+.pr-xxs { padding-right: 2% !important } .mr-xxs { margin-right: 2% !important }
+.pr-na { padding-right: 1% !important } .mr-na { margin-right: 1% !important }
 
 /*Footer*/
 #Footer .widgets_wrapper .widget { padding:0!important }
@@ -262,6 +262,14 @@ li { vertical-align: middle !important; }
 #scroll-up-agenda { cursor: pointer; } 
 #scroll-down-agenda { cursor: pointer; margin-top:-8px;} 
 #scrolles-agenda { bottom:69px; position: absolute; right: 0}
+.date-post { color: #979785 }
+.ver-mas-post { color: #51871c; }
+.img-noticia-vertical { float: left }
+.row-noticia-vertical { overflow:auto }
+.sep-bottom { border-bottom: 1px solid #ccc }
+.sep-right { border-right: 1px solid #ccc }
+.col-news-horizontal { min-height: 400px !important }
+
 
 /*Encuentra desplegado*/
 #rs-encuentra { display:table; background:#bebe07; position:fixed; height:100vh; width: 100%; top:0; left:0; 

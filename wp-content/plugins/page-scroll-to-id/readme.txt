@@ -3,8 +3,8 @@ Contributors: malihu
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UYJ5G65M6ZA28
 Tags: page scrolling, page animation, smooth scroll, navigation, single-page navigation
 Requires at least: 3.3
-Tested up to: 5.1
-Stable tag: 1.6.4
+Tested up to: 5.2
+Stable tag: 1.6.5
 License: The MIT License (MIT)
 License URI: http://opensource.org/licenses/MIT
 
@@ -96,7 +96,22 @@ Because it works and it already has a ton of features. The plugin has little dep
 
 6. Visual editor "Insert Page scoll to id target" modal
 
+7. Gutenberg block editor "Page scoll to id target" custom block
+
 == Changelog ==
+
+= 1.6.5 =
+
+* Added new option to exclude specific selectors from being handled by the plugin.
+* Added new option 'Auto-generate #ps2id-dummy-offset element'.
+* Added 'Page scroll to id target' block for Gutenberg block editor.
+* Added new feature for Gutenberg block editor: 
+* Fixed highlight not working in URLs with an apostrophe.
+* Fixed [this issue](https://wordpress.org/support/topic/only-works-on-initial-page-load/#post-11168522) regarding plugin's default selector when using non-WordPress jQuery library.
+* Fixed [this minor issue](https://wordpress.org/support/topic/no-more-smooth-scrolling/). 
+* Fixed multisite issue where few plugin options would not save/update properly.
+* Fixed [issue #10](https://github.com/malihu/page-scroll-to-id/issues/17)
+* Updated plugin's contextual help and documentation. 
 
 = 1.6.4 =
 
@@ -223,6 +238,10 @@ Because it works and it already has a ton of features. The plugin has little dep
 
 == Upgrade Notice ==
 
+= 1.6.5 =
+
+Added "Page scroll to id target" block and new features for Gutenberg block editor, added exclude selectors option, added new offset options, fixed various issues and bugs. 
+
 = 1.6.4 =
 
 Fixed a minor bug affecting the "Prevent other scripts from handling plugin's links" option. 
@@ -292,6 +311,7 @@ If you like this plugin and find it useful, consider making a [donation](https:/
 
 == Other/external resources ==
 
+* [How to create anchor links on WordPress Gutenberg editor](https://www.virfice.com/how-to-create-anchor-links-on-wordpress-gutenberg-editor/)
 * [Using Page scroll to id with the Divi Builder plugin](http://manos.malihu.gr/using-page-scroll-to-id-with-the-divi-builder-plugin/)
 * [One Page WordPress Smooth Scrolling Menu - How to Use Page Scroll to ID Plugin 2017](https://www.youtube.com/watch?v=ZJt7-0W-DeE)
 * [Smooth scrolling between page sections using Page scroll to id](http://sridharkatakam.com/smooth-scrolling-page-sections-using-page-scroll-id/)

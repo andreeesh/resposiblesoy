@@ -155,6 +155,11 @@
 		Plugin specific js --edit--
 		--------------------
 		*/
+
+		$(".mPS2id-show-option-common-values").click(function(e){
+			e.preventDefault();
+			$(this).next("span").toggleClass("mPS2id-show");
+		});
 		
 		$(".mPS2id-open-help").click(function(e){
 			e.preventDefault();

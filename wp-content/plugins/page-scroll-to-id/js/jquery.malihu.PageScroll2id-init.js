@@ -39,6 +39,9 @@
 						handler.selector='a[href*="#"]:not(._mPS2id-h)';
 					}else if(handler.selector==='a[href*=#]:not([href=#])'){
 						handler.selector='a[href*=#]:not([href=#]):not(._mPS2id-h)';
+					}else if(handler.selector && handler.selector.indexOf("mobmenu")!==-1){
+						//special cases
+						s.off("click");
 					}else{
 						s.off("click",handler.handler);
 					}
@@ -48,9 +51,27 @@
 		autoSelectors="a[data-ps2id-api='true'][href*='#'],.ps2id > a[href*='#'],a.ps2id[href*='#']";
 	$(document).ready(function(){
 		for(var k=0; k<_o.total_instances; k++){
+			//generate id from class name (e.g. class ps2id-id-myid gives element the id myid)
+			var c2iSel=$("[class*='ps2id-id-']");
+			if(c2iSel.length){
+				c2iSel.each(function(){
+					var c2i=$(this),
+						c2iClasses=c2i.attr("class").split(" "),
+						c2iVal;
+					if(!c2i.attr("id")){
+						for(var c2iClass in c2iClasses){
+							if(String(c2iClasses[c2iClass]).match(/^ps2id-id-\S+$/)){
+								c2iVal=c2iClasses[c2iClass].split("ps2id-id-")[1];
+								if(!$("#"+c2iVal).length) c2i.attr("id",c2iVal);
+								break;
+							}
+						}
+					}
+				});
+			}
 			//scroll to location hash on page load
 			if(_o.instances[_p+"_instance_"+k]["scrollToHash"]==="true" && _hash){
-				$(_o.instances[_p+"_instance_"+k]["selector"]+",."+shortcodeClass+","+autoSelectors).each(function(){
+				$(_o.instances[_p+"_instance_"+k]["selector"]+",."+shortcodeClass+","+autoSelectors).not(_o.instances[_p+"_instance_"+k]["excludeSelector"]).each(function(){
 					$(this).data(_p+"Element",true);
 				});
 				if(_validateLocHash(_hash,_o.instances[_p+"_instance_"+k]["scrollToHashForAll"]==="true")){
@@ -67,7 +88,7 @@
 	});
 	$(window).on("load",function(){
 		for(var i=0; i<_o.total_instances; i++){
-			var sel=$(_o.instances[_p+"_instance_"+i]["selector"]+",."+shortcodeClass+","+autoSelectors),
+			var sel=$(_o.instances[_p+"_instance_"+i]["selector"]+",."+shortcodeClass+","+autoSelectors).not(_o.instances[_p+"_instance_"+i]["excludeSelector"]),
 				autoCorrectScrollOpt=_o.instances[_p+"_instance_"+i]["autoCorrectScroll"],autoCorrectScroll=0;
 			sel.mPageScroll2id({
 				scrollSpeed:_o.instances[_p+"_instance_"+i]["scrollSpeed"],

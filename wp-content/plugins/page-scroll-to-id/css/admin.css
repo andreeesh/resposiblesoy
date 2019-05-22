@@ -127,3 +127,16 @@
 .oldwp-plugin-help-section.oldwp-plugin-help-section-active{
 	display: block;
 }
+
+.wp-core-ui .button.mPS2id-show-option-common-values{
+	margin: 4px 0 8px 0;
+}
+
+.mPS2id-show-option-common-values + span{
+	display: none;
+	position: relative;
+}
+
+.mPS2id-show-option-common-values + span.mPS2id-show{
+	display: block;
+}
