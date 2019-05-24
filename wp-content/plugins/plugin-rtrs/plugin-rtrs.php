@@ -469,36 +469,6 @@ if (!function_exists('sc_latest_news'))
 					echo '</div>';
 					$x++;
 				}
-				if($atts['display']=='horizontal')
-				{
-					#post_carousel_id('1370'); 
-
-					/*if($y==0): 
-						$separator="sep-right"; 
-						$padding="pr-xxs";
-					endif;
-					
-					if($y==1): 
-						$separator="sep-right"; 
-						$padding="pr-xxs pl-xxs";
-					endif;
-					
-					if($y==2): 
-						$separator=""; 
-						$padding="pl-xxs";
-					endif;
-					
-					echo '
-					<div class="wpb_column vc_column_container vc_col-sm-4 col-news-horizontal '.$padding.' '.$separator.'">
-					<div class="vc_column-inner">
-					<div class="wpb_wrapper">';
-					echo get_the_post_thumbnail($new->ID, 'full');
-					echo '<div class="date-post font-semibold">'.get_the_date().'</div>';
-					echo '<h6 class="extra-bold py-xs"><a href="/'.$new->post_name.'">'.$new->post_title.'</a></h6>';
-					echo '<span class="a-bottom"><a href="/'.$new->post_name.'" class="ver-mas-post">Ver más +</a></span>';
-					echo '</div></div></div>';
-					$y++;*/
-				}
             endwhile;
         endif;
     }
@@ -540,7 +510,7 @@ if (!function_exists('sc_rel_post_news'))
 				endif;
 				
 				echo '
-				<div class="wpb_column vc_column_container vc_col-sm-4 col-news-horizontal '.$padding.' '.$separator.'">
+				<div class="wpb_column vc_column_container vc_col-xs-12 vc_col-sm-4 vc_col-md-4 col-news-horizontal '.$padding.' '.$separator.'">
 				<div class="vc_column-inner">
 				<div class="wpb_wrapper">';
 				echo get_the_post_thumbnail($rel_new->ID, 'full');

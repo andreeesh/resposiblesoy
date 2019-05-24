@@ -54,14 +54,14 @@ if(is_object($post_next)){
                 <div class="section_wrapper">
                     <div class="the_content_wrapper">
                         <div class="vc_row wpb_row vc_row-fluid header-seccion pt-lg pb-xs">
-                            <div class="wpb_column vc_column_container vc_col-sm-6">
+                            <div class="wpb_column vc_column_container vc_col-xs-6">
                                 <div class="vc_column-inner">
                                     <div class="wpb_wrapper">
                                         <h6 style="color: #56871f;text-align: left" class="vc_custom_heading font-medium link-volver-biblioteca"><a href="/novedades">Volver a Novedades</a></h6>
                                     </div>
                                 </div>
 							</div>
-							<div class="wpb_column vc_column_container vc_col-sm-6">
+							<div class="wpb_column vc_column_container vc_col-xs-6">
                                 <div class="vc_column-inner">
                                     <div class="wpb_wrapper">
 										<?php
@@ -73,7 +73,7 @@ if(is_object($post_next)){
                             </div>
 						</div>
 						<div class="vc_row wpb_row vc_row-fluid">
-                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                            <div class="wpb_column vc_column_container vc_col-xs-12">
                                 <div class="vc_column-inner">
                                     <div class="wpb_wrapper shared">
 										<a target="_blank" href="mailto:?subject=<?=$post->post_title?>&body=<?=$post->post_excerpt?>. Seguí leyendo la nota haciendo click en el siguiente link: <?=the_permalink()?>"><img class="share-news" src="/wp-content/uploads/2019/05/share-mail.png"></a>
@@ -104,7 +104,7 @@ if(is_object($post_next)){
 						</div>
 						<?php the_content() ?>
 						<div class="vc_row wpb_row vc_row-fluid py-xs">
-                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                            <div class="wpb_column vc_column_container vc_col-xs-12">
                                 <div class="vc_column-inner">
 									<div class="wpb_wrapper shared">
 										<a target="_blank" href="mailto:?subject=<?=$post->post_title?>&body=<?=$post->post_excerpt?>. Seguí leyendo la nota haciendo click en el siguiente link: <?=the_permalink()?>"><img class="share-news" src="/wp-content/uploads/2019/05/share-mail.png"></a>
@@ -116,14 +116,14 @@ if(is_object($post_next)){
 							</div>
 						</div>
 						<div class="vc_row wpb_row vc_row-fluid">
-                            <div class="wpb_column vc_column_container vc_col-sm-6">
+                            <div class="wpb_column vc_column_container vc_col-xs-6">
                                 <div class="vc_column-inner">
                                     <div class="wpb_wrapper">
                                         <h6 style="color: #56871f;text-align: left" class="vc_custom_heading font-medium link-volver-biblioteca"><a href="/novedades">Volver a Novedades</a></h6>
                                     </div>
                                 </div>
 							</div>
-							<div class="wpb_column vc_column_container vc_col-sm-6">
+							<div class="wpb_column vc_column_container vc_col-xs-6">
                                 <div class="vc_column-inner">
                                     <div class="wpb_wrapper">
 										<?php
