@@ -60,43 +60,19 @@ $link_miembros="/miembros";
 $link_sobre_la_rtrs="/sobre-la-rtrs";
 $link_quienes_somos="/quienes-somos";
 
-if(strpos(home_url($wp->request), "miembros")) {
+if (strlen(str_replace(get_site_url(), "", home_url($wp->request))) > 0)
 	$menu_id="menu_not_home";
+
+if(strpos(home_url($wp->request), "miembros")) {
 	$link_miembros="";
 }
 
-if (strpos(home_url($wp->request), "productores")){
-	$menu_id="menu_not_home";
-} 
-
 if (strpos(home_url($wp->request), "sobre-la-rtrs")){
-	$menu_id="menu_not_home";
 	$link_sobre_la_rtrs="";
 } 
 
-if (strpos(home_url($wp->request), "nuestra-gestion")){
-	$menu_id="menu_not_home";
-} 
-
 if (strpos(home_url($wp->request), "quienes-somos")){
-	$menu_id="menu_not_home";
 	$link_quienes_somos="";
-}
-
-if (strpos(home_url($wp->request), "task-forces")){
-	$menu_id="menu_not_home";
-}
-
-if (strpos(home_url($wp->request), "biblioteca")){
-	$menu_id="menu_not_home";
-}
-
-if (strpos(home_url($wp->request), "documento")){
-	$menu_id="menu_not_home";
-}
-
-if (strpos(home_url($wp->request), "novedades")){
-	$menu_id="menu_not_home";
 }
 
 return '
@@ -247,15 +223,7 @@ $tags=get_tags(array('hide_empty'=>false));
 								$rs_tm_right="rs-top-menu-right";
 								$rs_lang_menu="rs-lang-menu";
 								$rs_search="rs-search";
-								if(strpos(home_url($wp->request), "miembros") ||
-								   strpos(home_url($wp->request), "productores") ||
-								   strpos(home_url($wp->request), "sobre-la-rtrs") ||
-								   strpos(home_url($wp->request), "nuestra-gestion") ||
-								   strpos(home_url($wp->request), "quienes-somos") ||
-								   strpos(home_url($wp->request), "task-forces") ||
-								   strpos(home_url($wp->request), "biblioteca") ||
-								   strpos(home_url($wp->request), "documento") ||
-								   strpos(home_url($wp->request), "novedades")) {
+								if (strlen(str_replace(get_site_url(), "", home_url($wp->request))) > 0){
 									$rs_tm_left="rs-top-alt-left";
 									$rs_tm_right="rs-top-alt-right";
 									$rs_lang_menu="rs-lang-menu-alt";

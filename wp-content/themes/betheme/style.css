@@ -78,6 +78,8 @@ h1, h2, h3, h4, h5, h6 { margin-bottom: 0 !important }
 .pr-xxs { padding-right: 2% !important } .mr-xxs { margin-right: 2% !important }
 .pr-na { padding-right: 1% !important } .mr-na { margin-right: 1% !important }
 
+.row { margin-left: 0 !important; margin-right: 0 !important }
+
 /*Footer*/
 #Footer .widgets_wrapper .widget { padding:0!important }
 #Footer p a { font-size:13px!important; }
@@ -120,7 +122,7 @@ li { vertical-align: middle !important; }
 .vc_tta-container { margin-bottom: 0 !important}
 
 /*SOBRE LA RTRS*/
-.caption-img-sobre { position: absolute }
+.caption-img-sobre { margin-left: 10%; margin-top: 40% }
 .list-unstyled { margin: 0 !important }
 .list-unstyled li { list-style: none }
 .year-history { font-size: 17px; font-weight: 500; color:#fbfbb1; margin-left:10px; padding-top:10px}
@@ -183,6 +185,8 @@ li { vertical-align: middle !important; }
 .font-semibold { font-weight: 600 !important}
 .font-medium {font-weight: 500 !important}
 .font-regular { font-weight: 300 !important }
+.font-italic { font-style: italic }
+.font-small { font-size: 14px }
 .extra-bold {font-weight:800!important}
 .text-white { color: #fff !important }
 .text-center { text-align: center !important }
@@ -216,7 +220,7 @@ li { vertical-align: middle !important; }
 #rs-btn-encuentre { font-weight:600; background-color:#bebe07; padding: 7px 30px; border-radius: 16px; color:#fff; font-size:14px; }
 #mobile-btn-encuentre { font-weight:600; color:#bebe07 !important; }
 .amarillo:hover { color:#bebe07; text-decoration: none }
-.amarillo { border:1px solid #bebe07; color:#bebe07; float: right; }
+.amarillo { border:1px solid #bebe07; color:#bebe07 }
 #rs-lang-menu { font-weight: 500; margin: 0 25px 0 25px; font-size: 17px }
 #rs-lang-menu-alt { font-weight: 500; margin: 0 25px 0 25px; font-size: 17px; color:#83836C !important}
 #rs-search, #rs-search-alt { margin-top:5px }
@@ -242,6 +246,7 @@ li { vertical-align: middle !important; }
 .bajada-numbers { text-align: center; color:#bcbc9c; font-weight:400 }
 
 /*Novedades y agenda*/
+.share-news { margin-right: 30px }
 .wrapper { overflow-x:hidden; background-color: #f7f7f0; padding:0; }
 .right { background-color: #35a7be; }
 .block-news { background-color:#f7f7f0; }
@@ -269,7 +274,19 @@ li { vertical-align: middle !important; }
 .sep-bottom { border-bottom: 1px solid #ccc }
 .sep-right { border-right: 1px solid #ccc }
 .col-news-horizontal { min-height: 400px !important }
+#wpcf7-f1336-p1281-o1 input[type="text"], #wpcf7-f1336-p1281-o1 input[type="email"] { box-shadow: none; border: 1px solid white; background: transparent; color: white; font-size: 18px; margin-bottom: 15px }
+#wpcf7-f1336-p1281-o1 input[type="text"]::placeholder, #wpcf7-f1336-p1281-o1 input[type="email"]::placeholder { color: white; font-size: 18px }
+#wpcf7-f1336-p1281-o1 input[type="text"]:focus, #wpcf7-f1336-p1281-o1 input[type="email"]:focus { box-shadow: none; border: 1px solid white; background: transparent; color: white; font-size: 18px }
+#wpcf7-f1336-p1281-o1 input[type="submit"] { margin-right: 0; background-color: transparent; border: 1px solid white; border-radius: 0 }
+#wpcf7-f1336-p1281-o1 input[type="submit"]:hover { background-color: white; border: 1px solid white; border-radius: 0; color: #333 }
+.link-next-post { background-image:url('/wp-content/uploads/2019/05/arrow-right-green.png'); background-repeat: no-repeat; background-position-x: right; background-position-y: 5px; padding-right: 30px }
+.flexslider { border: none !important; border-radius: 0 !important; -webkit-box-shadow: none !important; -o-box-shadow: none !important; box-shadow: none !important }
+.flex-control-nav {display:none !important}
 
+.sp-post-carousel-section .sp-post-carousel-area.sp_pc_theme_carousel_two .sp-pc-post-box,
+.sp-post-carousel-section .sp-post-carousel-area.sp_pc_theme_carousel_two .sp-pc-post-box:hover { margin: 0; padding: 0 20px; border-right: 1px solid #ccc; -webkit-box-shadow: none !important; -moz-box-shadow: none !important; box-shadow: none !important }
+.sp-post-carousel-area .sp-pc-post { margin-right: 0px !important }
+.sp-post-carousel-section-1370 .sp-pc-post-title a:hover { color: #51871c !important }
 
 /*Encuentra desplegado*/
 #rs-encuentra { display:table; background:#bebe07; position:fixed; height:100vh; width: 100%; top:0; left:0; 
@@ -306,6 +323,7 @@ li { vertical-align: middle !important; }
 #rs-explore-tags a:hover { color:#092c2e; text-decoration: none }
 
 @media (min-width:992px) and (max-width: 1239px){
+	.caption-img-sobre { margin-left: 10%; margin-top: 60% }
 	.menu > ul > li a { padding: 1.5em 0.4em 1em 0.4em; }
 	#rs-top-menu, #rs-top-menu-alt { margin: 27px 0 0 6px; }
 	#Top_bar a.responsive-menu-toggle { display:none !important; }
@@ -323,6 +341,7 @@ li { vertical-align: middle !important; }
 
 @media (min-width:992px){
 	/*SOBRE LA RTRS*/
+	.caption-img-sobre { margin-left: 10%; margin-top: 90% }
 	.pr-0 .vc_column-inner { padding-right: 0 !important }
 	/*GENERAL*/
 	#rs-top-menu a, #rs-top-menu-alt a { font-size:13px; }
@@ -374,7 +393,7 @@ li { vertical-align: middle !important; }
 @media (min-width: 768px) and (max-width: 991px){
 	.full-height { height: calc(100vh - 60px)}
 	/*SOBRE RTRS*/
-	.caption-img-sobre { margin-top: -145px; margin-left:60px }
+	.caption-img-sobre { margin-left: 10%; margin-top: -25% }
 	#Top_bar .logo-mobile { margin: -10px 0 0 0 !important }
 	#Top_bar a.responsive-menu-toggle { right: 0px !important; }
 	/*ENCUENTRA*/ 
@@ -401,7 +420,7 @@ li { vertical-align: middle !important; }
 @media (min-width: 480px) and (max-width: 767px){
 	.full-height { height: calc(100vh - 60px)}
 	/*SOBRE LA RTRS*/
-	.caption-img-sobre { margin-top: -120px; margin-left:30px }
+	.caption-img-sobre { margin-left: 10%; margin-top: -30% }
 	#Top_bar .logo-mobile { margin: -10px 0 0 0 !important }
 	#Top_bar { background-color: transparent !important; position: absolute !important }
 	/*ENCUENTRA*/ 
@@ -440,7 +459,7 @@ li { vertical-align: middle !important; }
 @media (max-width: 479px){
 	.full-height { height: calc(100vh - 60px)}
 	/*SOBRE LA RTRS*/
-	.caption-img-sobre { margin-top: -85px; margin-left:10px }
+	.caption-img-sobre { margin-left: 8%; margin-top: -36% }
 	/*Flags*/
 	.flag {float:none}
 	.link-country{float:none;padding-left:0px;padding-top:10px}

@@ -200,8 +200,8 @@ if (!function_exists('sc_news'))
 
 									$output.='<div class="col-sm-6">';
 									$output.='<div class="news-date">'.get_the_date('', $news->ID).'</div>';	
-									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title">'.get_the_title($news->ID).'</h5></a>';
-									$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
+									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title">'.wp_trim_words(get_the_title($news->ID), 10, "...").'</h5></a>';
+									#$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
 									$output.='</div>';
 									$output.='</div>';
 								}
@@ -258,8 +258,8 @@ if (!function_exists('sc_news'))
 									$output.='</div>';
 									$output.='<div class="col-sm-6 col-xs-12">';
 									$output.='<div class="news-date">'.get_the_date('', $news->ID).'</div>';	
-									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title py-xs">'.get_the_title($news->ID).'</h5></a>';
-									$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
+									$output.='<a class="link-title-news" href="'.get_the_permalink($news->ID).'"><h5 class="news-title">'.wp_trim_words(get_the_title($news->ID), 10, "...").'</h5></a>';
+									#$output.='<p class="news-excerpt">'.get_the_excerpt($news->ID).'</p>';		
 									$output.='</div>';
 									$output.='</div>';
 								}
@@ -305,6 +305,7 @@ if (!function_exists('sc_numbers'))
 {
 	function sc_numbers($attr, $content = null)
 	{
+		$output="";
 		$args=array(
 			'post_type'   => 'numero',
 			'post_status' => 'publish',
@@ -470,7 +471,9 @@ if (!function_exists('sc_latest_news'))
 				}
 				if($atts['display']=='horizontal')
 				{
-					if($y==0): 
+					#post_carousel_id('1370'); 
+
+					/*if($y==0): 
 						$separator="sep-right"; 
 						$padding="pr-xxs";
 					endif;
@@ -494,11 +497,61 @@ if (!function_exists('sc_latest_news'))
 					echo '<h6 class="extra-bold py-xs"><a href="/'.$new->post_name.'">'.$new->post_title.'</a></h6>';
 					echo '<span class="a-bottom"><a href="/'.$new->post_name.'" class="ver-mas-post">Ver más +</a></span>';
 					echo '</div></div></div>';
-					$y++;
+					$y++;*/
 				}
             endwhile;
         endif;
     }
+}
+
+if (!function_exists('sc_post_date'))
+{
+	function sc_post_date($atts)
+    {
+		echo '<div class="date-post font-semibold py-xxs">'.get_the_date().'</div>';
+	}
+}
+
+if (!function_exists('sc_rel_post_news'))
+{
+	function sc_rel_post_news($atts)
+	{
+		$rel_news = new WP_Query();
+        $rn_args=array('post_type'=>'post','post_status'=>'publish','orderby'=>'date','order'=>'DESC','cat'=>4,'posts_per_page'=>3);
+		$rel_news->query($rn_args);
+		if ($rel_news->have_posts()):
+			$y=0;
+            while ($rel_news->have_posts()):
+                $rel_news->the_post();
+				$rel_new=get_post();
+				if($y==0): 
+					$separator="sep-right"; 
+					$padding="pr-xxs";
+				endif;
+				
+				if($y==1): 
+					$separator="sep-right"; 
+					$padding="pr-xxs pl-xxs";
+				endif;
+				
+				if($y==2): 
+					$separator=""; 
+					$padding="pl-xxs";
+				endif;
+				
+				echo '
+				<div class="wpb_column vc_column_container vc_col-sm-4 col-news-horizontal '.$padding.' '.$separator.'">
+				<div class="vc_column-inner">
+				<div class="wpb_wrapper">';
+				echo get_the_post_thumbnail($rel_new->ID, 'full');
+				echo '<div class="date-post font-semibold">'.get_the_date().'</div>';
+				echo '<h6 class="extra-bold py-xs"><a href="/'.$rel_new->post_name.'">'.$rel_new->post_title.'</a></h6>';
+				echo '<span class="a-bottom"><a href="/'.$rel_new->post_name.'" class="ver-mas-post">Ver más +</a></span>';
+				echo '</div></div></div>';
+				$y++;
+			endwhile;
+		endif;
+	}
 }
 
 add_shortcode('buscador_miembros', 'sc_buscador_miembros');
@@ -509,4 +562,6 @@ add_shortcode('numbers', 'sc_numbers');
 add_shortcode('news', 'sc_news');
 add_shortcode('line_years', 'sc_line_years');
 add_shortcode('latest_news', 'sc_latest_news');
+add_shortcode('post_date', 'sc_post_date');
+add_shortcode('rel_post_news', 'sc_rel_post_news');
 ?>

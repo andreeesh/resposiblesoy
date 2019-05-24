@@ -848,7 +848,7 @@ select, textarea, .woocommerce .quantity input.qty,
 /* Focus */
 input[type="date"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
     color: <?php mfn_opts_show( 'color-form-focus', '#1982c2' ) ?>;
-    background-color: <?php hex2rgba( mfn_opts_get( 'background-form-focus', '#e9f5fc' ), $formAlpha, true ) ?> !important;
+    background-color: <?php hex2rgba( mfn_opts_get( 'background-form-focus', '#e9f5fc' ), $formAlpha, true ) ?>;
     border-color: <?php mfn_opts_show( 'border-form-focus', '#d5e5ee' ) ?>;
 }
 
