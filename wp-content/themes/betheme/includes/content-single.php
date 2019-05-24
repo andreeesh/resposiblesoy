@@ -75,11 +75,11 @@ if(is_object($post_next)){
 						<div class="vc_row wpb_row vc_row-fluid">
                             <div class="wpb_column vc_column_container vc_col-sm-12">
                                 <div class="vc_column-inner">
-                                    <div class="wpb_wrapper">
-										<a href="#"><img class="share-news" src="/wp-content/uploads/2019/05/share-mail.png"></a>
-										<a href="#"><img class="share-news" src="/wp-content/uploads/2019/05/share-twitter.png"></a>
-										<a href="#"><img class="share-news" src="/wp-content/uploads/2019/05/share-linkedin.png"></a>
-										<a href="#"><img class="share-news" src="/wp-content/uploads/2019/05/share-facebook.png"></a>
+                                    <div class="wpb_wrapper shared">
+										<a target="_blank" href="mailto:?subject=<?=$post->post_title?>&body=<?=$post->post_excerpt?>. Seguí leyendo la nota haciendo click en el siguiente link: <?=the_permalink()?>"><img class="share-news" src="/wp-content/uploads/2019/05/share-mail.png"></a>
+										<a class="btn-twitter" href=""><img class="share-news" src="/wp-content/uploads/2019/05/share-twitter.png"></a>
+										<a class="btn-linkedin" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=<?=get_the_permalink()?>&title=<?=$post->post_title?>&summary=<?=$post->post_title?>&source=<?=get_site_url()?>"><img class="share-news" src="/wp-content/uploads/2019/05/share-linkedin.png"></a>
+										<a class="btn-facebook" href="<?=the_permalink()?>"><img class="share-news" src="/wp-content/uploads/2019/05/share-facebook.png"></a>
                                     </div>
                                 </div>
 							</div>
@@ -102,7 +102,7 @@ if(is_object($post_next)){
                                 </div>
 							</div>
 						</div>
-						<?php mfn_builder_print(get_the_ID()) ?>
+						<?php the_content() ?>
 						<div class="vc_row wpb_row vc_row-fluid py-xs">
                             <div class="wpb_column vc_column_container vc_col-sm-12">
                                 <div class="vc_column-inner">

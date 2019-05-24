@@ -2,6 +2,49 @@
 
   /* globals jQuery, mfn */
 
+  function Shared() {
+    var t = this;
+    t.construct = function () {},
+    t.facebook = function (t) {
+      var o = "https://www.facebook.com/sharer/sharer.php?u=" + t.href;
+      return popupCenter(o, "popup", 700, 500);
+    },
+    t.twitter = function (t) {
+      var o = "https://twitter.com/intent/tweet?url=" + t.href + "&text=";
+      return popupCenter(o, "popup", 700, 500);
+    },
+    t.linkedin = function (t) {
+      var o = "http://www.linkedin.com/shareArticle?mini=true&url=" + t.href + "&title=" + t.title + "&summary=Summary&source=www.responsiblesoy.com";
+      return popupCenter(o, "popup", 700, 500);
+    }
+    t.construct() 
+  }
+
+function popupCenter(url, title, w, h) {
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    if (window.focus) {
+        newWindow.focus();
+    }
+}
+
+/*$(document).ready(function(){
+  oShared = new Shared, $(".shared").on("click", ".btn-facebook", function () {
+		return oShared.facebook(this), !1
+	}),
+	$(".shared").on("click", ".btn-twitter", function () {
+		return oShared.twitter(this), !1
+  }),
+  $(".shared").on("click", ".btn-linkedin", function () {
+    return oShared.linkedin(this), !1
+	})
+});*/
+
 
   "use strict";
 
