@@ -524,6 +524,17 @@ if (!function_exists('sc_rel_post_news'))
 	}
 }
 
+if (!function_exists('sc_certified_producers'))
+{
+	function sc_certified_producers()
+	{
+		$url = "http://platform.responsiblesoy.org/reportsinfo/";
+		$connectionInfo = array("Database"=>"SA_DWH_CHAINPOINT_RTRS", "UID"=>"public_website_user", "PWD"=>"P&34ha^TGH4er6DC", "ReturnDatesAsStrings" => true);
+		$connection = sqlsrv_connect('CHAIN-SQL01-W2K8\mssqlreports', $connectionInfo);
+		var_dump($connection);
+	}
+}
+
 add_shortcode('buscador_miembros', 'sc_buscador_miembros');
 add_shortcode('tabla_biblioteca', 'sc_tabla_biblioteca');
 add_shortcode('tipos_biblioteca', 'sc_tipos_biblioteca');
@@ -534,4 +545,5 @@ add_shortcode('line_years', 'sc_line_years');
 add_shortcode('latest_news', 'sc_latest_news');
 add_shortcode('post_date', 'sc_post_date');
 add_shortcode('rel_post_news', 'sc_rel_post_news');
+add_shortcode('certified_producers', 'sc_certified_producers');
 ?>
